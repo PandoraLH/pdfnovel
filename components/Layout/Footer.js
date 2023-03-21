@@ -9,18 +9,18 @@ export default function Footer() {
       <>
          <div
             className="footer flex justify-center"
-            style={{ backgroundColor: "#3A98B9" }}
+            style={{ backgroundColor: "#62CDFF" }}
          >
-            <div className="footer-container flex md:flex-row flex-col justify-around items-start p-20">
+            <div className="footer-container flex justify-around items-start ">
                <style jsx>{`
                   .footer-container {
                      width: 1152px;
                   }
                `}</style>
-               <div className="p-5 ">
+               <div className="p-3 ">
                   <ul>
                      <p className="text-gray-800 font-bold text-3xl pb-6">
-                        PDF<span className="text-blue-600">Novel</span>
+                        PDF<span className="text-red-600">Novel</span>
                      </p>
                      <div className="flex gap-6 pb-5">
                         <FaInstagram className="text-2xl cursor-pointer hover:text-yellow-600" />
@@ -30,7 +30,7 @@ export default function Footer() {
                      </div>
                   </ul>
                </div>
-               <div className="p-5">
+               <div className="p-3">
                   <ul>
                      <p className="text-gray-800 font-bold text-2xl pb-4">
                         Links
@@ -46,7 +46,7 @@ export default function Footer() {
                      </li>
                   </ul>
                </div>
-               <div className="p-5">
+               <div className="p-3">
                   <ul>
                      <p className="text-gray-800 font-bold text-2xl pb-4">
                         Information
@@ -70,7 +70,7 @@ export default function Footer() {
                      </li>
                   </ul>
                </div>
-               <div className="p-5">
+               <div className="p-3">
                   <ul>
                      <p className="text-gray-800 font-bold text-2xl pb-4">
                      Account
@@ -90,11 +90,11 @@ export default function Footer() {
                </div>
             </div>
          </div>
-         <div className="flex flex-col justify-center items-center text-center  p-5 bg-gray-50">
+         <div className="flex flex-col justify-center items-center text-center  p-2 bg-gray-50">
             <h1 className=" text-gray-800 font-semibold">
                © 2022-2023 All rights reserved | Build with ❤ by{" "}
                <span className="hover:text-blue-600 font-semibold cursor-pointer">
-                  streamline{" "}
+                  Pan{" "}
                </span>
             </h1>
          </div>
