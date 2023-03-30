@@ -21,7 +21,7 @@ export default async (req, res) => {
       .get();
 
    //  Loop through the items and fetch the imgSrc from each link
-   for (let i = 0; i < items.length; i++) {
+   for (let i = 0; i < 5; i++) {
       try {
          await page.goto(items[i].href, { waitUntil: "networkidle2" });
          const imgSrc = await page.$eval(
@@ -37,11 +37,9 @@ export default async (req, res) => {
             return synopsis.trim();
          });
          if (synopsis) {
-            description.push({
-               panel: "",
-               description: "",
-               synopsis: synopsis,
-            });
+            description.push({ panel: "" });
+            description.push({ description: "" });
+            description.push({ synopsis: synopsis });
          } else {
             const pArr = await page.$$(
                ".post-content.clear p:not(.jp-relatedposts p)"
