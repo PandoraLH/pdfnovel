@@ -9,7 +9,7 @@ export default function MainNav() {
             className="navbar flex h-14 justify-center"
             style={{ backgroundColor: "#62CDFF" }}
          >
-            <div className="navbar-container flex justify-between">
+            <div className="navbar-container flex justify-between p-8">
                <style jsx>{`
                   .navbar-container {
                      width: 1152px;

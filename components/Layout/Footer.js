@@ -11,7 +11,7 @@ export default function Footer() {
             className="footer flex justify-center"
             style={{ backgroundColor: "#62CDFF" }}
          >
-            <div className="footer-container flex justify-around items-start ">
+            <div className="footer-container flex md:flex-row flex-col justify-around items-start ">
                <style jsx>{`
                   .footer-container {
                      width: 1152px;
@@ -58,33 +58,29 @@ export default function Footer() {
                         How It Works
                      </li>
                      <li className="text-gray-500 text-md pb-2 font-semibold hover:text-blue-600 cursor-pointer">
-                     Frequently Asked Questions
-
+                        Frequently Asked Questions
                      </li>
                      <li className="text-gray-500 text-md pb-2 font-semibold hover:text-blue-600 cursor-pointer">
-                     Terms of Service
-
+                        Terms of Service
                      </li>
                      <li className="text-gray-500 text-md pb-2 font-semibold hover:text-blue-600 cursor-pointer">
-                     Privacy Policy
+                        Privacy Policy
                      </li>
                   </ul>
                </div>
                <div className="p-3">
                   <ul>
                      <p className="text-gray-800 font-bold text-2xl pb-4">
-                     Account
-
+                        Account
                      </p>
                      <li className="text-gray-500 text-md pb-2 font-semibold hover:text-blue-600 cursor-pointer">
-                     Edit Profile Data
-
+                        Edit Profile Data
                      </li>
                      <li className="text-gray-500 text-md pb-2 font-semibold hover:text-blue-600 cursor-pointer">
-                     Library
+                        Library
                      </li>
                      <li className="text-gray-500 text-md pb-2 font-semibold hover:text-blue-600 cursor-pointer">
-                     Change Password
+                        Change Password
                      </li>
                   </ul>
                </div>

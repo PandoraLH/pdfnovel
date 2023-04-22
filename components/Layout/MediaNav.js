@@ -22,10 +22,10 @@ export default function MediaNav() {
             </nav>
          </header>
          <div
-            className="MediaNav fixed bottom-0 left-0 right-0 flex justify-center "
+            className="MediaNav w-full fixed bottom-0 flex !justify-center "
             style={{ backgroundColor: "#62CDFF" }}
          >
-            <div className="flex gap-5 items-center py-2">
+            <div className="flex flex-grow items-stretch justify-start flex-row py-2">
                <Link
                   className="flex flex-col items-center justify-center"
                   href="/Home"

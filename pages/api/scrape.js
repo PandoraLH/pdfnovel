@@ -1,12 +1,11 @@
 import puppeteer from "puppeteer";
 import cheerio from "cheerio";
 
-export default async (req, res) => {
-   const url = "https://jnovels.com/11light-1novel20-pdf/";
-
+async function fetchPDFJnovels() {
+   const pdfUrl = "https://jnovels.com/11light-1novel20-pdf/";
    const browser = await puppeteer.launch();
    const page = await browser.newPage();
-   await page.goto(url, { waitUntil: "networkidle2" });
+   await page.goto(pdfUrl, { waitUntil: "networkidle2" });
    const html = await page.content();
 
    const $ = cheerio.load(html);
@@ -20,7 +19,7 @@ export default async (req, res) => {
       }))
       .get();
 
-   //  Loop through the items and fetch the imgSrc from each link
+   //  Loop through the items and fetch the information from each link
    for (let i = 0; i < 5; i++) {
       try {
          await page.goto(items[i].href, { waitUntil: "networkidle2" });
@@ -82,7 +81,57 @@ export default async (req, res) => {
          const liData = await page.$$(
             "ol:not(.comment-list):not(.children) li"
          );
-         const volumeArr = [];
+         const pdfVolume = [];
+         for (let j = 0; j < liData.length; j++) {
+            const liText = await liData[j].$eval("a", (a) =>
+               a.previousSibling.textContent
+                  .replaceAll("—", "")
+                  .replaceAll("–", "")
+                  .replaceAll("-", "")
+                  .trim()
+            );
+            const liLink = await liData[j].$eval("a", (a) => a.href.trim());
+            pdfVolume.push({ volume: liText, link: liLink });
+         }
+         items[i].imgSrc = imgSrc;
+         items[i].description = description;
+         items[i].pdfVolume = pdfVolume;
+      } catch (err) {
+         console.error(err);
+      }
+   }
+   await browser.close();
+   return items;
+}
+
+async function fetchEpubJnovels() {
+   const epubUrl = "https://jnovels.com/hlight-10novel21-epub/";
+
+   const browser = await puppeteer.launch();
+   const page = await browser.newPage();
+   await page.goto(epubUrl, { waitUntil: "networkidle2" });
+   const html = await page.content();
+
+   const $ = cheerio.load(html);
+   const ol = $("ol");
+   const liTags = ol.children("li");
+
+   const items = liTags
+      .map((i, el) => ({
+         name: $(el).text(),
+         href: $(el).find("a").attr("href"),
+      }))
+      .get();
+
+   //  Loop through the items and fetch the link from each link
+   for (let i = 0; i < 5; i++) {
+      try {
+         await page.goto(items[i].href, { waitUntil: "networkidle2" });
+
+         const liData = await page.$$(
+            "ol:not(.comment-list):not(.children) li"
+         );
+         const epubVolume = [];
          for (let j = 0; j < liData.length; j++) {
             const liText = await liData[j].$eval("a", (a) =>
                a.previousSibling.textContent
@@ -93,16 +142,27 @@ export default async (req, res) => {
             );
 
             const liLink = await liData[j].$eval("a", (a) => a.href.trim());
-            volumeArr.push({ volume: liText, link: liLink });
+            epubVolume.push({ volume: liText, link: liLink });
          }
-         items[i].imgSrc = imgSrc;
-         items[i].description = description;
-         items[i].volumeArr = volumeArr;
+         items[i].epubVolume = epubVolume;
       } catch (err) {
          console.error(err);
       }
    }
-
    await browser.close();
-   res.status(200).json({ items });
-};
+   return items;
+}
+
+async function fetchNovels() {
+   let pdfItems = await fetchPDFJnovels();
+   let epubItems = await fetchEpubJnovels();
+   for (let i = 0; i <= 5; i++) {
+      pdfItems[i].epubVolume = epubItems[i].epubVolume;
+   }
+   return pdfItems;
+}
+
+export default async function (req, res) {
+   let items = await fetchNovels();
+   res.status(200).json(items);
+}
