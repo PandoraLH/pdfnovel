@@ -1,9 +1,5 @@
-import puppeteer from "puppeteer";
-import cheerio from "cheerio";
-
-async function fetchPDFJnovels() {
+async function fetchPDFJnovels(browser) {
    const pdfUrl = "https://jnovels.com/11light-1novel20-pdf/";
-   const browser = await puppeteer.launch();
    const page = await browser.newPage();
    await page.goto(pdfUrl, { waitUntil: "networkidle2" });
    const html = await page.content();
@@ -13,20 +9,23 @@ async function fetchPDFJnovels() {
    const liTags = ol.children("li");
 
    const items = liTags
-      .map((i, el) => ({
-         name: $(el).text(),
-         href: $(el).find("a").attr("href"),
-      }))
-      .get();
+      .map((i, el) => {
+         const href = $(el).find("a").attr("href");
+         return href ? { name: $(el).text(), href } : null;
+      })
+      .get()
+      .filter((item) => item !== null);
 
    //  Loop through the items and fetch the information from each link
-   for (let i = 0; i < 5; i++) {
+   for (let i = 0; i < items.length; i++) {
       try {
          await page.goto(items[i].href, { waitUntil: "networkidle2" });
-         const imgSrc = await page.$eval(
-            ".featured-media img",
-            (img) => img.src
-         );
+         let imgSrc = null;
+         try {
+            imgSrc = await page.$eval(".featured-media img", (img) => img.src);
+         } catch (error) {
+            console.log(`Missing image at place ${i}`);
+         }
          const description = [];
          let synopsis = await page.$$eval(".synopsis-description p", (pArr) => {
             let synopsis = "";
@@ -36,8 +35,8 @@ async function fetchPDFJnovels() {
             return synopsis.trim();
          });
          if (synopsis) {
-            description.push({ panel: "" });
-            description.push({ description: "" });
+            description.push({ panel: null });
+            description.push({ description: null });
             description.push({ synopsis: synopsis });
          } else {
             const pArr = await page.$$(
@@ -73,8 +72,6 @@ async function fetchPDFJnovels() {
                   synopsis = synopsis.replace("Associated Names", "");
                }
                description.push({ synopsis: synopsis.trim() });
-            } else if (pArr.length === 1) {
-               description.push({ synopsis: "" });
             }
          }
 
@@ -83,16 +80,18 @@ async function fetchPDFJnovels() {
          );
          const pdfVolume = [];
          for (let j = 0; j < liData.length; j++) {
-            const liText = await liData[j].$eval("a", (a) =>
-               a.previousSibling.textContent
-                  .replaceAll("—", "")
-                  .replaceAll("–", "")
-                  .replaceAll("-", "")
-                  .trim()
+            const children = await liData[j].$$eval("*", (childElements) =>
+               childElements
+                  .map((child) => {
+                     const href = child.getAttribute("href");
+                     return href ? { link: href } : null;
+                  })
+                  .filter(Boolean)
             );
-            const liLink = await liData[j].$eval("a", (a) => a.href.trim());
-            pdfVolume.push({ volume: liText, link: liLink });
+            children.push({ id: j + 1 });
+            pdfVolume.push(children);
          }
+
          items[i].imgSrc = imgSrc;
          items[i].description = description;
          items[i].pdfVolume = pdfVolume;
@@ -100,14 +99,11 @@ async function fetchPDFJnovels() {
          console.error(err);
       }
    }
-   await browser.close();
    return items;
 }
 
-async function fetchEpubJnovels() {
+async function fetchEpubJnovels(browser) {
    const epubUrl = "https://jnovels.com/hlight-10novel21-epub/";
-
-   const browser = await puppeteer.launch();
    const page = await browser.newPage();
    await page.goto(epubUrl, { waitUntil: "networkidle2" });
    const html = await page.content();
@@ -117,14 +113,15 @@ async function fetchEpubJnovels() {
    const liTags = ol.children("li");
 
    const items = liTags
-      .map((i, el) => ({
-         name: $(el).text(),
-         href: $(el).find("a").attr("href"),
-      }))
-      .get();
+      .map((i, el) => {
+         const href = $(el).find("a").attr("href");
+         return href ? { name: $(el).text(), href } : null;
+      })
+      .get()
+      .filter((item) => item !== null);
 
    //  Loop through the items and fetch the link from each link
-   for (let i = 0; i < 5; i++) {
+   for (let i = 0; i < items.length; i++) {
       try {
          await page.goto(items[i].href, { waitUntil: "networkidle2" });
 
@@ -133,36 +130,43 @@ async function fetchEpubJnovels() {
          );
          const epubVolume = [];
          for (let j = 0; j < liData.length; j++) {
-            const liText = await liData[j].$eval("a", (a) =>
-               a.previousSibling.textContent
-                  .replaceAll("—", "")
-                  .replaceAll("–", "")
-                  .replaceAll("-", "")
-                  .trim()
+            const children = await liData[j].$$eval("*", (childElements) =>
+               childElements
+                  .map((child) => {
+                     const href = child.getAttribute("href");
+                     return href ? { href } : null;
+                  })
+                  .filter(Boolean)
             );
-
-            const liLink = await liData[j].$eval("a", (a) => a.href.trim());
-            epubVolume.push({ volume: liText, link: liLink });
+            children.push({ id: j + 1 });
+            epubVolume.push(children);
          }
          items[i].epubVolume = epubVolume;
       } catch (err) {
          console.error(err);
       }
    }
-   await browser.close();
    return items;
 }
 
-async function fetchNovels() {
-   let pdfItems = await fetchPDFJnovels();
-   let epubItems = await fetchEpubJnovels();
-   for (let i = 0; i <= 5; i++) {
-      pdfItems[i].epubVolume = epubItems[i].epubVolume;
-   }
-   return pdfItems;
-}
+export default async function fetchNovels() {
+   const browser = await puppeteer.launch();
+   try {
+      let pdfItems = await fetchPDFJnovels(browser);
+      let epubItems = await fetchEpubJnovels(browser);
 
-export default async function (req, res) {
-   let items = await fetchNovels();
-   res.status(200).json(items);
+      for (let i = 0; i < pdfItems.length; i++) {
+         for (let j = 0; j < epubItems.length; j++) {
+            if (pdfItems[i].name.trim() === epubItems[j].name.trim()) {
+               pdfItems[i].epubVolume = epubItems[j].epubVolume;
+               break;
+            }
+         }
+      }
+      return pdfItems;
+   } catch (error) {
+      console.error(error);
+   } finally {
+      await browser.close();
+   }
 }
