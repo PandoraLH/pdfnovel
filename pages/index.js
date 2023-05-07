@@ -1,4 +1,5 @@
 import Layout from "@/Layout/Layout";
+import 'antd/dist/reset.css';
 
 export default function Home() {
   return (

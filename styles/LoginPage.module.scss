@@ -1,0 +1,11 @@
+.container {
+   display: flex;
+   justify-content: center;
+   
+   .ant-tabs-nav {
+      display: flex;
+      justify-content: center;
+      text-align: center;
+      background-color: red;
+   }
+}
