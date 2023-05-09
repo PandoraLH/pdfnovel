@@ -31,7 +31,7 @@ export default function Navbar() {
         className={`navbar flex justify-center ${
           targetReached ? "h-32" : "h-24"
         }`}
-        style={{ backgroundColor: "#0869FB" }}
+        style={{ backgroundColor: "#1A4AB9" }}
       >
         <div
           className={`navbar-container flex ${
@@ -60,13 +60,13 @@ export default function Navbar() {
             }`}
           >
             <div className={`flex gap-10 ${targetReached ? "my-1" : "mr-48"}`}>
-              <Link className="font-semibold" href="/Home">
+              <Link className="font-semibold hover:text-blue-300" href="/Home">
                 Home
               </Link>
-              <Link className="font-semibold" href="/Home">
+              <Link className="font-semibold hover:text-blue-300" href="/Home">
                 Series
               </Link>
-              <Link className="font-semibold" href="/Home">
+              <Link className="font-semibold hover:text-blue-300" href="/Home">
                 Forums
               </Link>
             </div>
