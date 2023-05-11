@@ -7,7 +7,7 @@ const SubLink = ({ text }) => {
       <GiSpottedArrowhead className="text-xl mr-2" />
       <span className=" hover:text-blue-300 cursor-pointer font-inter font-semibold text-md">
         {" "}
-        {text}{" "}
+        {text}
       </span>
     </li>
   );
