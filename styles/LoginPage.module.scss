@@ -1,11 +1,8 @@
-.container {
+.container
+   :where(.css-dev-only-do-not-override-ed5zg0).ant-tabs
+   > div
+   > .ant-tabs-nav
+   .ant-tabs-nav-wrap {
    display: flex;
    justify-content: center;
-   
-   .ant-tabs-nav {
-      display: flex;
-      justify-content: center;
-      text-align: center;
-      background-color: red;
-   }
 }
