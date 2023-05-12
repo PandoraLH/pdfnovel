@@ -18,7 +18,7 @@ export default function Navbar() {
   }, [screenWidth]);
 
   useEffect(() => {
-    if (screenWidth <= 800) {
+    if (screenWidth <= 880) {
       setTargetReached(true);
     } else {
       setTargetReached(false);
@@ -56,17 +56,35 @@ export default function Navbar() {
           </Link>
           <div
             className={`flex items-center text-white font-inter ${
-              targetReached ? "justify-center w-full mt-3 text-2xl" : "gap-5"
+              targetReached ? "justify-center items-center text-2xl" : "gap-5"
             }`}
           >
-            <div className={`flex gap-10 ${targetReached ? "mr-7" : "mr-48"}`}>
-              <Link className="font-semibold hover:text-blue-300" href="/Home">
+            <div
+              className={`flex text-center font-semibold ${
+                targetReached ? "mr-4" : "mr-48"
+              }`}
+            >
+              <Link
+                className="flex justify-center items-center h-20 w-28 lg:h-24 lg:w-28
+                 hover:text-blue-300 bg-white bg-opacity-0 hover:bg-opacity-95 transition duration-500 ease-in-out"
+                href="/Home"
+              >
                 Home
               </Link>
-              <Link className="font-semibold hover:text-blue-300" href="/Home">
+
+              <Link
+                className="flex justify-center items-center h-20 w-28 lg:h-24 lg:w-28
+                 hover:text-blue-300 bg-white bg-opacity-0 hover:bg-opacity-95 transition duration-500 ease-in-out"
+                href="/Series"
+              >
                 Series
               </Link>
-              <Link className="font-semibold hover:text-blue-300" href="/Home">
+
+              <Link
+                className="flex justify-center items-center h-20 w-28 lg:h-24 lg:w-28
+                hover:text-blue-300 bg-white bg-opacity-0 hover:bg-opacity-95 transition duration-500 ease-in-out"
+                href="/Home"
+              >
                 Forums
               </Link>
             </div>
