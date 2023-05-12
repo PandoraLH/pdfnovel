@@ -56,10 +56,10 @@ export default function Navbar() {
           </Link>
           <div
             className={`flex items-center text-white font-inter ${
-              targetReached ? "flex-col" : "gap-5"
+              targetReached ? "justify-center w-full mt-3 text-2xl" : "gap-5"
             }`}
           >
-            <div className={`flex gap-10 ${targetReached ? "my-1" : "mr-48"}`}>
+            <div className={`flex gap-10 ${targetReached ? "mr-7" : "mr-48"}`}>
               <Link className="font-semibold hover:text-blue-300" href="/Home">
                 Home
               </Link>
