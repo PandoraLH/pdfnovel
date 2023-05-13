@@ -18,7 +18,7 @@ export default function Navbar() {
   }, [screenWidth]);
 
   useEffect(() => {
-    if (screenWidth <= 880) {
+    if (screenWidth <= 900) {
       setTargetReached(true);
     } else {
       setTargetReached(false);
@@ -27,26 +27,14 @@ export default function Navbar() {
 
   return (
     <header>
-      <nav
-        className={`navbar flex justify-center ${
-          targetReached ? "h-32" : "h-24"
-        }`}
-        style={{ backgroundColor: "#1A4AB9" }}
-      >
+      <nav className="navbar flex justify-center bg-[#1A4AB9] lg:h-24 h-32">
         <div
-          className={`navbar-container flex ${
+          className={`navbar-container flex w-[1152px] ${
             targetReached ? "flex-col" : "p-8 justify-between"
           }`}
         >
-          <style jsx>{`
-            .navbar-container {
-              width: 1152px;
-            }
-          `}</style>
           <Link
-            className={`flex gap-2 justify-center items-center ${
-              targetReached ? "" : "pl-4"
-            }`}
+            className="flex gap-2 justify-center items-center lg:pl-4 pl-0"
             href="/"
           >
             <Image src="/logo.png" alt="Logo" width={50} height={50} />
@@ -54,16 +42,8 @@ export default function Navbar() {
               PDF Novel
             </div>
           </Link>
-          <div
-            className={`flex items-center text-white font-inter ${
-              targetReached ? "justify-center items-center text-2xl" : "gap-5"
-            }`}
-          >
-            <div
-              className={`flex text-center font-semibold ${
-                targetReached ? "mr-4" : "mr-48"
-              }`}
-            >
+          <div className="flex items-center text-white font-inter Lg:gap-5 lg:text-base justify-center text-2xl">
+            <div className="flex text-center font-semibold lg:mr-48 mr-4">
               <Link
                 className="flex justify-center items-center h-20 w-28 lg:h-24 lg:w-28
                  hover:text-blue-300 bg-white bg-opacity-0 hover:bg-opacity-95 transition duration-500 ease-in-out"

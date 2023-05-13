@@ -9,16 +9,8 @@ import { FaYoutube } from "react-icons/fa";
 export default function Footer() {
   return (
     <>
-      <div
-        className="footer flex justify-center"
-        style={{ backgroundColor: "#1A4AB9" }}
-      >
-        <div className="footer-container flex md:flex-row flex-col justify-around items-start my-8">
-          <style jsx>{`
-            .footer-container {
-              width: 1152px;
-            }
-          `}</style>
+      <div className="footer flex justify-center bg-[#1A4AB9]">
+        <div className="footer-container flex md:flex-row flex-col justify-around items-start my-8 w-[1152px">
           <div className="p-3">
             <ul>
               <p className="text-gray-800 font-bold text-3xl pb-6">
@@ -60,7 +52,7 @@ export default function Footer() {
           </div>
         </div>
       </div>
-      <div className="flex flex-col justify-center items-center text-center  p-2 bg-gray-50">
+      <div className="flex flex-col justify-center items-center text-center p-2 bg-gray-50">
         <h1 className=" text-gray-800 font-semibold">
           © 2022-2023 All rights reserved | Build with ❤ by{" "}
           <span className="hover:text-blue-600 font-semibold cursor-pointer">
