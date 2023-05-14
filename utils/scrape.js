@@ -7,7 +7,7 @@ async function fetchPDFJnovels(browser) {
    const page = await browser.newPage();
    await page.goto(pdfUrl, { waitUntil: "networkidle2" });
    const html = await page.content();
-   
+
    //get the ol in the html
    const $ = cheerio.load(html);
    const ol = $("ol");
@@ -37,9 +37,9 @@ async function fetchPDFJnovels(browser) {
             console.log(`Missing image at place ${i}`);
          }
 
-         //get description 
+         //get description
          const description = [];
-         
+
          //get the synopsis in .synopsis-description p
          let synopsis = await page.$$eval(".synopsis-description p", (pArr) => {
             let synopsis = "";
@@ -54,7 +54,7 @@ async function fetchPDFJnovels(browser) {
             description.push({ synopsis: synopsis });
          } else {
             //if it doesn't has the synopsis-description p
-            //get the content in every p in .post-content.clear 
+            //get the content in every p in .post-content.clear
             const pArr = await page.$$(
                ".post-content.clear p:not(.jp-relatedposts p)"
             );
@@ -86,7 +86,7 @@ async function fetchPDFJnovels(browser) {
                   synopsis.indexOf("Associated Names");
                if (associatedNamesIndex !== -1) {
                   synopsis = synopsis.slice(0, associatedNamesIndex);
-                  // Erase after the word "Associated Names" 
+                  // Erase after the word "Associated Names"
                   synopsis = synopsis.replace("Associated Names", "");
                }
                description.push({ synopsis: synopsis.trim() });
@@ -108,8 +108,7 @@ async function fetchPDFJnovels(browser) {
                   })
                   .filter(Boolean)
             );
-            children.push({ id: j + 1 });
-            pdfVolume.push(children);
+            pdfVolume.push(...children);
          }
 
          //save all to items
@@ -124,7 +123,7 @@ async function fetchPDFJnovels(browser) {
 }
 
 async function fetchEpubJnovels(browser) {
-   //get the epub link 
+   //get the epub link
    const epubUrl = "https://jnovels.com/hlight-10novel21-epub/";
    const page = await browser.newPage();
    await page.goto(epubUrl, { waitUntil: "networkidle2" });
@@ -142,7 +141,7 @@ async function fetchEpubJnovels(browser) {
       .get()
       .filter((item) => item !== null);
 
-   // Similar to pdf, but just get the download link 
+   // Similar to pdf, but just get the download link
    for (let i = 0; i < items.length; i++) {
       try {
          await page.goto(items[i].href, { waitUntil: "networkidle2" });
@@ -156,12 +155,11 @@ async function fetchEpubJnovels(browser) {
                childElements
                   .map((child) => {
                      const href = child.getAttribute("href");
-                     return href ? { href } : null;
+                     return href ? { link: href } : null;
                   })
                   .filter(Boolean)
             );
-            children.push({ id: j + 1 });
-            epubVolume.push(children);
+            epubVolume.push(...children);
          }
          items[i].epubVolume = epubVolume;
       } catch (err) {
