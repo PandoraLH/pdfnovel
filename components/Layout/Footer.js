@@ -10,7 +10,7 @@ export default function Footer() {
   return (
     <>
       <div className="footer flex justify-center bg-[#1A4AB9]">
-        <div className="footer-container flex md:flex-row flex-col justify-around items-start my-8 w-[1152px">
+        <div className="footer-container flex md:flex-row flex-col justify-around items-start mt-8 w-[1152px">
           <div className="p-3">
             <ul>
               <p className="text-gray-800 font-bold text-3xl pb-6">
@@ -24,7 +24,7 @@ export default function Footer() {
               </div>
             </ul>
           </div>
-          <div className="p-3">
+          <div className="px-4">
             <ul>
               <MainLink text="Links" />
               <SubLink text="Home" />
@@ -32,7 +32,7 @@ export default function Footer() {
               <SubLink text="Forums" />
             </ul>
           </div>
-          <div className="p-3">
+          <div className="px-4">
             <ul>
               <MainLink text="Information" />
               <SubLink text="About" />
@@ -42,7 +42,7 @@ export default function Footer() {
               <SubLink text="Privacy Policy" />
             </ul>
           </div>
-          <div className="p-3">
+          <div className="px-4">
             <ul>
               <MainLink text="Account" />
               <SubLink text="Edit Profile Data" />

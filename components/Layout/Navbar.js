@@ -27,7 +27,7 @@ export default function Navbar() {
 
   return (
     <header>
-      <nav className="navbar flex justify-center bg-[#1A4AB9] lg:h-24 h-32">
+      <nav className="navbar flex justify-center bg-[#1A4AB9] h-20">
         <div
           className={`navbar-container flex w-[1152px] ${
             targetReached ? "flex-col" : "p-8 justify-between"
@@ -45,7 +45,7 @@ export default function Navbar() {
           <div className="flex items-center text-white font-inter Lg:gap-5 lg:text-base justify-center text-2xl">
             <div className="flex text-center font-semibold lg:mr-48 mr-4">
               <Link
-                className="flex justify-center items-center h-20 w-28 lg:h-24 lg:w-28
+                className="flex justify-center items-center h-20 w-28 text-2xl lg:h-24 lg:w-28
                  hover:text-blue-300 bg-white bg-opacity-0 hover:bg-opacity-95 transition duration-500 ease-in-out"
                 href="/Home"
               >
@@ -53,7 +53,7 @@ export default function Navbar() {
               </Link>
 
               <Link
-                className="flex justify-center items-center h-20 w-28 lg:h-24 lg:w-28
+                className="flex justify-center items-center h-20 w-28 text-2xl lg:h-24 lg:w-28
                  hover:text-blue-300 bg-white bg-opacity-0 hover:bg-opacity-95 transition duration-500 ease-in-out"
                 href="/Series"
               >
@@ -61,7 +61,7 @@ export default function Navbar() {
               </Link>
 
               <Link
-                className="flex justify-center items-center h-20 w-28 lg:h-24 lg:w-28
+                className="flex justify-center items-center h-20 w-28 text-2xl lg:h-24 lg:w-28
                 hover:text-blue-300 bg-white bg-opacity-0 hover:bg-opacity-95 transition duration-500 ease-in-out"
                 href="/Home"
               >
@@ -72,7 +72,7 @@ export default function Navbar() {
               className="flex bg-white text-[#0869FB] font-bold py-2 px-6 hover:bg-gray-50 active:drop-shadow-xl active:shadow-slate-200"
               href="Home"
             >
-              LOG IN
+              Log in
             </Link>
           </div>
         </div>
