@@ -1,36 +1,60 @@
-import { useRouter } from "next/router";
-import { getBookById } from "../api/book/getById/[bookId]";
+import axios from 'axios';
 
-export async function getServerSideProps({ params }) {
-   const { seriesId } = params;
-   try {
-      const res = await getBookById(seriesId);
-      const book = res.data;
+export default function SeriesPage({ book }) {
+  if (!book) {
+    return <p>Loading...</p>;
+  }
 
-      return { props: { book } };
-   } catch (error) {
-      console.error(error);
-      return { props: { book: null } };
-   }
+  return (
+    <div>
+      <h1>{book.name}</h1>
+      <p>{book.href}</p>
+      {/* Add more book details as needed */}
+    </div>
+  );
 }
 
-function SeriesPage({ book }) {
-   const router = useRouter();
-   if (router.isFallback) {
-      return <div>Loading...</div>;
-   }
-   if (!book) {
-      return <div>Book not found</div>;
-   }
+export async function getStaticPaths() {
+  try {
+    const response = await axios.get('http://localhost:3000/api/book/getAll');
+    const books = response.data;
 
-   return (
-      <div>
-         <h1>{book.name}</h1>
-         <img src={book.imgSrc} alt={book.name} />
-         <p>{book.description}</p>
-         {/* Render other book information */}
-      </div>
-   );
+    const paths = books.map((book) => ({
+      params: { seriesId: book._id },
+    }));
+
+    return {
+      paths,
+      fallback: true,
+    };
+  } catch (error) {
+    console.error('Error fetching books:', error);
+    return {
+      paths: [],
+      fallback: true,
+    };
+  }
 }
 
-export default SeriesPage;
+export async function getStaticProps({ params }) {
+  const { seriesId } = params;
+
+  try {
+    const response = await axios.get(`http://localhost:3000/api/book/getById/${seriesId}`);
+    const book = response.data;
+
+    return {
+      props: {
+        book,
+      },
+    };
+  } catch (error) {
+    console.error('Error fetching book:', error);
+
+    return {
+      props: {
+        book: null,
+      },
+    };
+  }
+}
