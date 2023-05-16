@@ -43,7 +43,10 @@ export default function Navbar() {
             </div>
           </Link>
           <div className="flex items-center text-white font-inter Lg:gap-5 lg:text-base justify-center text-2xl">
-            <div className="flex text-center font-semibold lg:mr-48 mr-4">
+            <div
+              className={`flex text-center font-semibold lg:mr-48 mr-4
+            ${targetReached ? "fixed bottom-0 bg-[#1A4AB9]" : ""}`}
+            >
               <Link
                 className="flex justify-center items-center h-20 w-28 text-2xl lg:h-24 lg:w-28
                  hover:text-blue-300 bg-white bg-opacity-0 hover:bg-opacity-95 transition duration-500 ease-in-out"
@@ -67,9 +70,18 @@ export default function Navbar() {
               >
                 Forums
               </Link>
+
+              <Link
+                className="flex justify-center items-center h-20 w-28 text-2xl lg:h-24 lg:w-28
+                hover:text-blue-300 bg-white bg-opacity-0 hover:bg-opacity-95 transition duration-500 ease-in-out"
+                href="/Home"
+              >
+                Login
+              </Link>
             </div>
             <Link
-              className="flex bg-white text-[#0869FB] font-bold py-2 px-6 hover:bg-gray-50 active:drop-shadow-xl active:shadow-slate-200"
+              className={`"flex bg-white text-[#0869FB] font-bold py-2 px-6 hover:bg-gray-50 active:drop-shadow-xl active:shadow-slate-200 text-lg 
+              ${targetReached ? "hidden" : ""}`}
               href="Home"
             >
               Log in
