@@ -9,10 +9,10 @@ import { FaYoutube } from "react-icons/fa";
 export default function Footer() {
   return (
     <>
-      <div className="footer flex justify-center bg-[#1A4AB9]">
-        <div className="footer-container flex flex-col justify-between mt-8 md:flex-row px-10">
-          <div className="logo-container flex flex-col items-center pb-3 md:pb-6 pt-3">
-            <span className="font-bold font-poppins text-4xl pb-3 md:pb-6 bg-gradient-to-r from-purple-500 to-[#ffda55] text-transparent bg-clip-text">
+      <div className="footer flex justify-center bg-main-bg-color">
+        <div className="footer-container flex flex-col justify-between mt-4 md:mt-8 md:flex-row px-5">
+          <div className="logo-container flex flex-col items-center pb-5 md:pb-6 ">
+            <span className="font-bold font-poppins text-4xl pb-3 md:pb-6 bg-gradient-to-r bg-logo-color text-transparent bg-clip-text">
               PDF Novel
             </span>
             <div className="flex gap-6 text-3xl">
@@ -22,7 +22,7 @@ export default function Footer() {
               <FaYoutube className="cursor-pointer hover:text-red-600" />
             </div>
           </div>
-          <div className="link-container flex flex-col  md:flex-row">
+          <div className="link-container flex flex-col md:flex-row text-main-text-color">
             <div className="px-10">
               <ul>
                 <MainLink text="Links" />

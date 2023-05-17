@@ -11,6 +11,13 @@ module.exports = {
         inter: ["Inter", "sans-serif"],
         poppins: ["Poppins", "sans-serif"],
       },
+      colors: {
+        transparent: "transparent",
+        current: "currentColor",
+        "main-bg-color": "#2ab7ca",
+        "main-text-color": "#f4f4f8",
+        "logo-color": "#ffda55",
+      },
     },
   },
   plugins: [],

@@ -27,7 +27,7 @@ export default function Navbar() {
 
   return (
     <header>
-      <nav className="navbar flex justify-center items-center bg-[#1A4AB9] h-20">
+      <nav className="navbar flex justify-center items-center bg-main-bg-color h-20">
         <div
           className={`navbar-container flex ${targetReached ? "flex-col" : ""}`}
         >
@@ -36,14 +36,18 @@ export default function Navbar() {
             href="/"
           >
             <Image src="/logo.png" alt="Logo" width={50} height={50} />
-            <div className="text-lg font-poppins font-bold text-white">
+            <div className="text-lg font-poppins font-bold text-main-text-color">
               PDF Novel
             </div>
           </Link>
-          <div className="flex items-center text-white font-inter Lg:gap-5 lg:text-base justify-center text-2xl">
+          <div className="flex items-center text-main-text-color font-inter Lg:gap-5 lg:text-base justify-center text-2xl">
             <div
-              className={`flex text-center font-semibold lg:mr-48 mr-4
-            ${targetReached ? "fixed bottom-0 bg-[#1A4AB9]" : ""}`}
+              className={`flex text-center font-semibold lg:mr-48 
+            ${
+              targetReached
+                ? "fixed bottom-0 bg-gradient-to-r bg-main-bg-color w-full justify-center"
+                : "mr-4"
+            }`}
             >
               <Link
                 className="flex justify-center items-center h-14 md:h-20 w-28 text-2xl
@@ -56,7 +60,7 @@ export default function Navbar() {
               <Link
                 className="flex justify-center items-center h-14 md:h-20 w-28 text-2xl
                  hover:text-blue-300 bg-white bg-opacity-0 hover:bg-opacity-95 transition duration-500 ease-in-out"
-                href="/Series"
+                href="/series"
               >
                 Series
               </Link>
@@ -80,7 +84,7 @@ export default function Navbar() {
               )}
             </div>
             <Link
-              className={`"flex bg-white text-[#0869FB] font-bold py-2 px-6 hover:bg-gray-50 active:drop-shadow-xl active:shadow-slate-200 text-lg 
+              className={`"flex bg-[#f4f4f8] text-blue-400 font-bold py-2 px-6 hover:bg-gray-50 active:drop-shadow-xl active:shadow-slate-200 text-lg 
               ${targetReached ? "hidden" : ""}`}
               href="Home"
             >
