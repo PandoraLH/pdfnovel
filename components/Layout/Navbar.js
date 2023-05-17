@@ -27,14 +27,12 @@ export default function Navbar() {
 
   return (
     <header>
-      <nav className="navbar flex justify-center bg-[#1A4AB9] h-20">
+      <nav className="navbar flex justify-center items-center bg-[#1A4AB9] h-20">
         <div
-          className={`navbar-container flex w-[1152px] ${
-            targetReached ? "flex-col" : "p-8 justify-between"
-          }`}
+          className={`navbar-container flex ${targetReached ? "flex-col" : ""}`}
         >
           <Link
-            className="flex gap-2 justify-center items-center lg:pl-4 pl-0"
+            className="flex gap-2 justify-center items-center md:mr-24 lg:pl-4 pl-0"
             href="/"
           >
             <Image src="/logo.png" alt="Logo" width={50} height={50} />
@@ -48,7 +46,7 @@ export default function Navbar() {
             ${targetReached ? "fixed bottom-0 bg-[#1A4AB9]" : ""}`}
             >
               <Link
-                className="flex justify-center items-center h-20 w-28 text-2xl lg:h-24 lg:w-28
+                className="flex justify-center items-center h-14 md:h-20 w-28 text-2xl
                  hover:text-blue-300 bg-white bg-opacity-0 hover:bg-opacity-95 transition duration-500 ease-in-out"
                 href="/Home"
               >
@@ -56,7 +54,7 @@ export default function Navbar() {
               </Link>
 
               <Link
-                className="flex justify-center items-center h-20 w-28 text-2xl lg:h-24 lg:w-28
+                className="flex justify-center items-center h-14 md:h-20 w-28 text-2xl
                  hover:text-blue-300 bg-white bg-opacity-0 hover:bg-opacity-95 transition duration-500 ease-in-out"
                 href="/Series"
               >
@@ -64,7 +62,7 @@ export default function Navbar() {
               </Link>
 
               <Link
-                className="flex justify-center items-center h-20 w-28 text-2xl lg:h-24 lg:w-28
+                className="flex justify-center items-center h-14 md:h-20 w-28 text-2xl
                 hover:text-blue-300 bg-white bg-opacity-0 hover:bg-opacity-95 transition duration-500 ease-in-out"
                 href="/Home"
               >
@@ -73,7 +71,7 @@ export default function Navbar() {
 
               {targetReached && (
                 <Link
-                  className="flex justify-center items-center h-20 w-28 text-2xl lg:h-24 lg:w-28
+                  className="flex justify-center items-center h-14 md:h-20 w-28 text-2xl
                 hover:text-blue-300 bg-white bg-opacity-0 hover:bg-opacity-95 transition duration-500 ease-in-out"
                   href="/Home"
                 >
