@@ -71,13 +71,15 @@ export default function Navbar() {
                 Forums
               </Link>
 
-              <Link
-                className="flex justify-center items-center h-20 w-28 text-2xl lg:h-24 lg:w-28
+              {targetReached && (
+                <Link
+                  className="flex justify-center items-center h-20 w-28 text-2xl lg:h-24 lg:w-28
                 hover:text-blue-300 bg-white bg-opacity-0 hover:bg-opacity-95 transition duration-500 ease-in-out"
-                href="/Home"
-              >
-                Login
-              </Link>
+                  href="/Home"
+                >
+                  Login
+                </Link>
+              )}
             </div>
             <Link
               className={`"flex bg-white text-[#0869FB] font-bold py-2 px-6 hover:bg-gray-50 active:drop-shadow-xl active:shadow-slate-200 text-lg 
