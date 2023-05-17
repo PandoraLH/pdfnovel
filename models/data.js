@@ -16,16 +16,10 @@ const dataSchema = new mongoose.Schema(
          {
             link: { type: String },
          },
-         {
-            id: { type: String },
-         },
       ],
       epubVolume: [
          {
             link: { type: String },
-         },
-         {
-            id: { type: String },
          },
       ],
    },

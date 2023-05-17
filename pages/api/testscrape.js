@@ -20,7 +20,7 @@ async function fetchPDFJnovels(browser) {
       .filter((item) => item !== null);
 
    //  Loop through the items and fetch the information from each link
-   for (let i = 0; i < items.length; i++) {
+   for (let i = 0; i < 5; i++) {
       try {
          await page.goto(items[i].href, { waitUntil: "networkidle2" });
          let imgSrc = null;
@@ -87,14 +87,14 @@ async function fetchPDFJnovels(browser) {
                childElements
                   .map((child) => {
                      const href = child.getAttribute("href");
-                     return href ? { href } : null;
+                     return href ? { link: href } : null;
                   })
                   .filter(Boolean)
             );
-            children.push({ id: j + 1 });
-            pdfVolume.push(children);
+            const id = j + 1;
+            const pdfData = children.map((child) => ({ id, ...child }));
+            pdfVolume.push(pdfData);
          }
-
          items[i].imgSrc = imgSrc;
          items[i].description = description;
          items[i].pdfVolume = pdfVolume;
@@ -124,7 +124,7 @@ async function fetchEpubJnovels(browser) {
       .filter((item) => item !== null);
 
    //  Loop through the items and fetch the link from each link
-   for (let i = 0; i < items.length; i++) {
+   for (let i = 0; i < 20; i++) {
       try {
          await page.goto(items[i].href, { waitUntil: "networkidle2" });
 
@@ -158,8 +158,8 @@ async function fetchNovels() {
       let pdfItems = await fetchPDFJnovels(browser);
       let epubItems = await fetchEpubJnovels(browser);
 
-      for (let i = 0; i < pdfItems.length; i++) {
-         for (let j = 0; j < epubItems.length; j++) {
+      for (let i = 0; i < 20; i++) {
+         for (let j = 0; j < 20; j++) {
             if (pdfItems[i].name.trim() === epubItems[j].name.trim()) {
                pdfItems[i].epubVolume = epubItems[j].epubVolume;
                break;
@@ -175,6 +175,7 @@ async function fetchNovels() {
 }
 
 export default async function (req, res) {
-   let items = await fetchNovels();
-   res.status(200).json("test");
+   const browser = await puppeteer.launch();
+   let items = await fetchPDFJnovels(browser);
+   res.status(200).json(items);
 }

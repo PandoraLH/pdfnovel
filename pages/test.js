@@ -2,14 +2,18 @@ import { Button } from "@mui/material";
 
 const MyButton = () => {
    const buttonStyle = {
-      backgroundColor: "blue",
+      backgroundColor: "red",
       color: "white",
+      border: "none",
+      borderRadius: "0",
    };
 
    return (
-      <Button style={buttonStyle} variant="contained">
-         Click me!
-      </Button>
+      <div className="button flex justify-center my-10 ">
+         <Button style={buttonStyle} variant="contained">
+            Click me!
+         </Button>
+      </div>
    );
 };
 
