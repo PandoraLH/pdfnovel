@@ -3,16 +3,16 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { Box, CircularProgress, Typography } from "@mui/material";
 
-export default function SeriesPage({ book }) {
+export default function SeriesPage({ novel }) {
    const router = useRouter();
 
    useEffect(() => {
-      if (!book) {
-         router.push("/404"); // Redirect to a 404 page if book data is not available
+      if (!novel) {
+         router.push("/404"); // Redirect to a 404 page if novel data is not available
       }
-   }, [book, router]);
+   }, [novel, router]);
 
-   if (!book) {
+   if (!novel) {
       return (
          <Box
             display="flex"
@@ -36,11 +36,11 @@ export default function SeriesPage({ book }) {
 
 export async function getStaticPaths() {
    try {
-      const response = await axios.get("http://localhost:3000/api/book/getAll");
-      const books = response.data;
+      const response = await axios.get("http://localhost:3000/api/novel/getAll");
+      const novels = response.data;
 
-      const paths = books.map((book) => ({
-         params: { seriesId: book._id },
+      const paths = novels.map((novel) => ({
+         params: { seriesId: novel._id },
       }));
 
       return {
@@ -48,7 +48,7 @@ export async function getStaticPaths() {
          fallback: true,
       };
    } catch (error) {
-      console.error("Error fetching books:", error);
+      console.error("Error fetching novels:", error);
       return {
          paths: [],
          fallback: true,
@@ -61,21 +61,21 @@ export async function getStaticProps({ params }) {
 
    try {
       const response = await axios.get(
-         `http://localhost:3000/api/book/getById/${seriesId}`
+         `http://localhost:3000/api/novel/getById/${seriesId}`
       );
-      const book = response.data;
+      const novel = response.data;
 
       return {
          props: {
-            book,
+            novel,
          },
       };
    } catch (error) {
-      console.error("Error fetching book:", error);
+      console.error("Error fetching novel:", error);
 
       return {
          props: {
-            book: null,
+            novel: null,
          },
       };
    }

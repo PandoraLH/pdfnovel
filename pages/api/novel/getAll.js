@@ -6,11 +6,11 @@ export default async function getAll(req, res) {
       try {
          await db.connect();
 
-         const books = await data.find({});
-         res.status(200).json(books);
+         const novels = await data.find({});
+         res.status(200).json(novels);
       } catch (error) {
          console.error(error);
-         res.status(500).json({ message: "Error retrieving books" });
+         res.status(500).json({ message: "Error retrieving Novels" });
       } finally {
          await db.disconnect();
       }

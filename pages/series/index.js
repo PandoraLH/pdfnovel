@@ -1,18 +1,18 @@
 import axios from "axios";
 
-export default function SeriesPage({ books }) {
-   if (!books) {
+export default function SeriesPage({ novels }) {
+   if (!novels) {
       return <p>Loading...</p>;
    }
 
    return (
       <div>
-         <h1>All Books</h1>
-         {books.map((book) => (
-            <div key={book._id}>
-               <h2>{book.name}</h2>
-               <p>{book.href}</p>
-               {/* Add more book details as needed */}
+         <h1>All novels</h1>
+         {novels.map((novel) => (
+            <div key={novel._id}>
+               <h2>{novel.name}</h2>
+               <p>{novel.href}</p>
+               {/* Add more novel details as needed */}
             </div>
          ))}
       </div>
@@ -21,20 +21,22 @@ export default function SeriesPage({ books }) {
 
 export async function getStaticProps() {
    try {
-      const response = await axios.get("http://localhost:3000/api/book/getAll");
-      const books = response.data;
+      const response = await axios.get(
+         "http://localhost:3000/api/novel/getAll"
+      );
+      const novels = response.data;
 
       return {
          props: {
-            books,
+            novels,
          },
       };
    } catch (error) {
-      console.error("Error fetching books:", error);
+      console.error("Error fetching novels:", error);
 
       return {
          props: {
-            books: null,
+            novels: null,
          },
       };
    }
