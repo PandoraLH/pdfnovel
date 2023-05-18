@@ -8,7 +8,7 @@ function MyApp({ Component, pageProps }) {
 
    return (
       <div className="flex items-center justify-center">
-         <div className="w-[1152px] border-l border-r border-gray-300">
+         <div className="w-[1152px] shadow-xl">
             <ThemeProvider theme={theme}>
                <Layout title={pageTitle}>
                   <Component {...pageProps} title={pageTitle} />
