@@ -1,9 +1,18 @@
 import axios from "axios";
+import { useState } from "react";
 import LightNovel from "../../components/Other/LightNovel";
 import Pagination from "@mui/material/Pagination";
-import Stack from "@mui/material/Stack";
 
 export default function SeriesPage({ books }) {
+  const [page, setPage] = useState(1);
+  const totalNovels = books.length;
+
+  const handleChange = (event, value) => {
+    setPage(value);
+  };
+
+  const currentNovels = books.slice((page - 1) * 10, page * 10) || [];
+
   if (!books) {
     return <p>Loading...</p>;
   }
@@ -16,45 +25,48 @@ export default function SeriesPage({ books }) {
         </div>
         <div className="h-full w-[80%]">
           <div>Search bar</div>
-          <Stack spacing={2}>
-            <Pagination count={10} color="primary" />
-          </Stack>
-          <div className="lightnovel">
-            <LightNovel
-              title="Title"
-              description="Description"
-              volumn="Volumn"
+          <div className="flex flex-col items-center mb-3">
+            <Pagination
+              count={Math.ceil(totalNovels / 10)}
+              color="primary"
+              size="large"
+              onChange={handleChange}
+              showFirstButton
+              showLastButton
+              boundaryCount={1}
+              siblingCount={5}
             />
-            <LightNovel
-              title="Title"
-              description="Description"
-              volumn="Volumn"
-            />
-            <LightNovel
-              title="Title"
-              description="Description"
-              volumn="Volumn"
+            <div className="lightnovel mt-4 mb-1">
+              {currentNovels.map((book) => (
+                <LightNovel
+                  key={book._id}
+                  image={book.imgSrc}
+                  title={book.name}
+                  description={book.description[2].synopsis}
+                  volumn={book.href}
+                />
+              ))}
+            </div>
+            <Pagination
+              count={Math.ceil(totalNovels / 10)}
+              color="primary"
+              size="large"
+              onChange={handleChange}
+              showFirstButton
+              showLastButton
+              boundaryCount={1}
+              siblingCount={5}
             />
           </div>
-          <div>Pagination</div>
         </div>
       </div>
-      <h1>All Books</h1>
-
-      {books.map((book) => (
-        <div key={book._id}>
-          <h2>{book.name}</h2>
-          <p>{book.href}</p>
-          {/* Add more book details as needed */}
-        </div>
-      ))}
     </div>
   );
 }
 
 export async function getStaticProps() {
   try {
-    const response = await axios.get("http://localhost:3000/api/book/getNovel");
+    const response = await axios.get("http://localhost:3000/api/book/getAll");
     const books = response.data;
 
     return {
