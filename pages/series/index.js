@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import { useMediaQuery } from "@mui/material";
 import LightNovel from "../../components/Other/LightNovel";
 import Pagination from "@mui/material/Pagination";
 import TextField from "@mui/material/TextField";
@@ -9,6 +10,10 @@ import SearchIcon from "@mui/icons-material/Search";
 export default function SeriesPage({ books }) {
   const [page, setPage] = useState(1);
   const totalNovels = books.length;
+
+  const isMediumScreen = useMediaQuery("(max-width: 768px)");
+  const siblingCount = isMediumScreen ? 0 : 5;
+  const boundaryCount = isMediumScreen ? 0 : 1;
 
   const handleChange = (event, value) => {
     setPage(value);
@@ -48,8 +53,8 @@ export default function SeriesPage({ books }) {
               onChange={handleChange}
               showFirstButton
               showLastButton
-              boundaryCount={1}
-              siblingCount={5}
+              boundaryCount={boundaryCount}
+              siblingCount={siblingCount}
             />
             <div className="lightnovel mt-4 mb-1">
               {currentNovels.map((book) => (
@@ -69,8 +74,8 @@ export default function SeriesPage({ books }) {
               onChange={handleChange}
               showFirstButton
               showLastButton
-              boundaryCount={1}
-              siblingCount={5}
+              boundaryCount={boundaryCount}
+              siblingCount={siblingCount}
             />
           </div>
         </div>

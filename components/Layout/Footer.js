@@ -8,7 +8,7 @@ import { FaYoutube } from "react-icons/fa";
 
 export default function Footer() {
   return (
-    <>
+    <div className="pb-24 lg:pb-0">
       <div className="footer flex justify-center bg-main-bg-color">
         <div className="footer-container flex flex-col justify-between mt-4 md:mt-8 md:flex-row px-5">
           <div className="logo-container flex flex-col items-center pb-5 md:pb-6 ">
@@ -60,6 +60,6 @@ export default function Footer() {
           </span>
         </h1>
       </div>
-    </>
+    </div>
   );
 }

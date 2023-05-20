@@ -42,15 +42,15 @@ export default function Navbar() {
           </Link>
           <div className="flex items-center text-main-text-color font-inter Lg:gap-5 lg:text-base justify-center text-2xl">
             <div
-              className={`flex text-center font-semibold lg:mr-48 
+              className={`flex text-center font-semibold lg:mr-48 text-2xl h-14 md:h-20 
             ${
               targetReached
-                ? "fixed bottom-0 bg-gradient-to-r bg-main-bg-color w-full justify-center"
+                ? "fixed bottom-0 bg-main-bg-color w-full justify-center"
                 : "mr-4"
             }`}
             >
               <Link
-                className="flex justify-center items-center h-14 md:h-20 w-28 text-2xl
+                className="flex justify-center items-center w-28 
                  hover:text-blue-300 bg-white bg-opacity-0 hover:bg-opacity-95 transition duration-500 ease-in-out"
                 href="/Home"
               >
@@ -58,7 +58,7 @@ export default function Navbar() {
               </Link>
 
               <Link
-                className="flex justify-center items-center h-14 md:h-20 w-28 text-2xl
+                className="flex justify-center items-center w-28 
                  hover:text-blue-300 bg-white bg-opacity-0 hover:bg-opacity-95 transition duration-500 ease-in-out"
                 href="/series"
               >
@@ -66,7 +66,7 @@ export default function Navbar() {
               </Link>
 
               <Link
-                className="flex justify-center items-center h-14 md:h-20 w-28 text-2xl
+                className="flex justify-center items-center w-28 
                 hover:text-blue-300 bg-white bg-opacity-0 hover:bg-opacity-95 transition duration-500 ease-in-out"
                 href="/Home"
               >
@@ -75,7 +75,7 @@ export default function Navbar() {
 
               {targetReached && (
                 <Link
-                  className="flex justify-center items-center h-14 md:h-20 w-28 text-2xl
+                  className="flex justify-center items-center w-28 
                 hover:text-blue-300 bg-white bg-opacity-0 hover:bg-opacity-95 transition duration-500 ease-in-out"
                   href="/Home"
                 >
