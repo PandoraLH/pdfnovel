@@ -6,7 +6,7 @@ const LightNovel = ({ id, image, title, description, volumn }) => {
   return (
     <div
       key={id}
-      className="lightnovel-container flex items-start border-b-2 mb-3"
+      className="lightnovel-container flex items-start border-b-2 mb-3 pb-3"
     >
       <Link href="/" className="flex-shrink-0">
         <Image src={image} alt="Image" width={150} height={200} />

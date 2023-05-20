@@ -2,6 +2,9 @@ import axios from "axios";
 import { useState } from "react";
 import LightNovel from "../../components/Other/LightNovel";
 import Pagination from "@mui/material/Pagination";
+import TextField from "@mui/material/TextField";
+import InputAdornment from "@mui/material/InputAdornment";
+import SearchIcon from "@mui/icons-material/Search";
 
 export default function SeriesPage({ books }) {
   const [page, setPage] = useState(1);
@@ -24,7 +27,19 @@ export default function SeriesPage({ books }) {
           <div>Sort</div>
         </div>
         <div className="h-full w-[80%]">
-          <div>Search bar</div>
+          <TextField
+            label="Search novel"
+            variant="outlined"
+            size="small"
+            className="w-full mb-3 mt-3"
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <SearchIcon className="cursor-pointer" />
+                </InputAdornment>
+              ),
+            }}
+          />
           <div className="flex flex-col items-center mb-3">
             <Pagination
               count={Math.ceil(totalNovels / 10)}
