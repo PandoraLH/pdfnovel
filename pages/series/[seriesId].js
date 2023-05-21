@@ -2,9 +2,9 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { Box, CircularProgress, Typography, Button } from "@mui/material";
-import Information from "components/Series/Information";
-import Blur from "components/Series/Blur";
-import Content from "components/Series/Content";
+import Information from "components/SeriesDetails/Information";
+import Blur from "components/SeriesDetails/Blur";
+import Content from "components/SeriesDetails/Content";
 import { AiFillHome } from "react-icons/ai";
 import { IoIosArrowBack } from "react-icons/io";
 export default function SeriesPage({ novel }) {
@@ -32,7 +32,7 @@ export default function SeriesPage({ novel }) {
    return (
       <Box className="w-full">
          <Box className="bg-slate-200">
-            <Blur /> 
+            <Blur />
             <Box className="py-5">
                <Button className="bg-zinc-100 flex flex-row items-center gap-2 px-3 rounded-md shadow-md">
                   <IoIosArrowBack size={26} />

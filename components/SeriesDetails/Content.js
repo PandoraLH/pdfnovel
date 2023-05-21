@@ -1,6 +1,6 @@
 import { Box, Typography, Button } from "@mui/material";
 import { AiFillEye } from "react-icons/ai";
-import TabDownload from "components/Series/TabDownload";
+import TabDownload from "components/SeriesDetails/TabDownload";
 import Image from "next/image";
 
 const Content = ({ novel }) => {
