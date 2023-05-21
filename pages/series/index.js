@@ -31,20 +31,22 @@ export default function SeriesPage({ books }) {
         <div className="h-full w-[20%]">
           <div>Sort</div>
         </div>
-        <div className="h-full w-[80%]">
-          <TextField
-            label="Search novel"
-            variant="outlined"
-            size="small"
-            className="w-full mb-3 mt-3"
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <SearchIcon className="cursor-pointer" />
-                </InputAdornment>
-              ),
-            }}
-          />
+        <div className="h-full w-[80%] mt-3">
+          <div className="mb-3">
+            <TextField
+              label="Search novel"
+              variant="outlined"
+              size="small"
+              className="w-full"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <SearchIcon className="cursor-pointer" />
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </div>
           <div className="flex flex-col items-center mb-3">
             <Pagination
               count={Math.ceil(totalNovels / 10)}

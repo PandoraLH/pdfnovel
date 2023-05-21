@@ -11,7 +11,7 @@ export default function Footer() {
     <div className="pb-24 lg:pb-0">
       <div className="footer flex justify-center bg-main-bg-color">
         <div className="footer-container flex flex-col justify-between mt-4 md:mt-8 md:flex-row px-5">
-          <div className="logo-container flex flex-col items-center pb-5 md:pb-6 ">
+          <div className="logo-container flex flex-col items-center pb-5 md:pb-6 md:mr-5">
             <span className="font-bold font-poppins text-4xl pb-3 md:pb-6 bg-gradient-to-r bg-logo-color text-transparent bg-clip-text">
               PDF Novel
             </span>
@@ -34,18 +34,18 @@ export default function Footer() {
             <div className="px-10">
               <ul>
                 <MainLink text="Information" />
+                <SubLink text="FAQ" />
                 <SubLink text="About" />
                 <SubLink text="How It Works" />
-                <SubLink text="Frequently Asked Questions" />
-                <SubLink text="Terms of Service" />
                 <SubLink text="Privacy Policy" />
+                <SubLink text="Terms of Service" />
               </ul>
             </div>
             <div className="px-10">
               <ul>
                 <MainLink text="Account" />
-                <SubLink text="Edit Profile Data" />
                 <SubLink text="Library" />
+                <SubLink text="Edit Profile Data" />
                 <SubLink text="Change Password" />
               </ul>
             </div>
