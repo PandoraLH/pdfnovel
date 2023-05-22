@@ -52,7 +52,7 @@ export default function Navbar() {
               <Link
                 className="flex justify-center items-center w-28 
                  hover:text-blue-300 bg-white bg-opacity-0 hover:bg-opacity-95 transition duration-500 ease-in-out"
-                href="/Home"
+                href="/"
               >
                 Home
               </Link>
