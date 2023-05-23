@@ -27,7 +27,7 @@ export default function Navbar() {
 
   return (
     <header>
-      <nav className="navbar bg-main-bg-color h-20 ">
+      <nav className="navbar bg-main-bg-color h-20 px-14 ">
         <div
           className={`navbar-container flex  ${
             targetReached ? "flex-col" : "justify-between px-2"
@@ -44,7 +44,7 @@ export default function Navbar() {
               PDF Novel
             </div>
           </Link>
-          <div className="flex items-center justify-center text-main-text-color font-inter Lg:gap-5 lg:text-base text-2xl">
+          <div className="flex items-center justify-center text-main-text-color font-inter Lg:gap-5 lg:text-base text-2xl z-10">
             <div
               className={`flex font-semibold lg:mr-48 text-2xl h-14 md:h-20 
             ${
