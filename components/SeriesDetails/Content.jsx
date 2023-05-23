@@ -3,13 +3,30 @@ import { AiFillEye } from "react-icons/ai";
 import { FaBars } from "react-icons/fa";
 import TabDownload from "components/SeriesDetails/TabDownload";
 import Image from "next/image";
+import { useState } from "react";
+import InformationModal from "./InformationModal";
 
 const Content = ({ novel }) => {
+   const [openModal, setOpenModal] = useState(false);
+
+   const handleOpenModal = () => {
+      setOpenModal(true);
+   };
+
+   const handleCloseModal = () => {
+      setOpenModal(false);
+   };
+
    return (
       <Box className=" bg-zinc-100 rounded-t-md">
          <Box className="pb-5 border-t border-l border-r border-gray-400 rounded-t-md ">
             <Box className="block relative md:hidden">
-               <FaBars size={28} className="absolute right-7 top-7" />
+               <FaBars
+                  size={28}
+                  className="absolute right-7 top-7"
+                  onClick={handleOpenModal}
+               />
+               <InformationModal isOpen={openModal} isClose = {handleCloseModal} />
             </Box>
             <Box className="flex flex-row p-7 items-center ">
                <div>
