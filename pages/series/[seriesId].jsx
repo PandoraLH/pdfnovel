@@ -42,11 +42,11 @@ export default function SeriesPage({ novel }) {
                   </Box>
                </Button>
             </Box>
-            <Box className="flex gap-10">
-               <Box className="w-4/5 ">
+            <Box className="flex md:gap-4 lg:gap-8 xl:gap-10 ">
+               <Box className="w-full md:w-4/5 ">
                   <Content novel={novel} />
                </Box>
-               <Box className="w-1/4">
+               <Box className="hidden md:block w-1/4 ">
                   <Information />
                </Box>
             </Box>

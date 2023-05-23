@@ -12,9 +12,9 @@ export default function Layout({ title, children }) {
             <link rel="icon" href="/logo.png" />
          </Head>
          <div className="flex min-h flex-col justify-between">
-            <Navbar/>
+            <Navbar />
             <main>{children}</main>
-            <Footer/>   
+            <Footer />
          </div>
       </>
    );

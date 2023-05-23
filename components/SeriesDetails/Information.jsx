@@ -9,7 +9,7 @@ const Information = () => {
             <Image src="/logo.png" alt="Logo" width={150} height={150} />
          </div>
          <Box className="flex flex-col">
-            <Typography className="flex justify-center text-4xl py-2 text-rose-500 border-gray-500">
+            <Typography className="flex justify-center text-3xl py-2 px-2 text-rose-500 border-gray-500">
                Information
             </Typography>
             <div className="my-2">
