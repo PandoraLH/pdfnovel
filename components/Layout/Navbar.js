@@ -27,12 +27,16 @@ export default function Navbar() {
 
   return (
     <header>
-      <nav className="navbar flex justify-center items-center bg-main-bg-color h-20">
+      <nav className="navbar bg-main-bg-color h-20 ">
         <div
-          className={`navbar-container flex ${targetReached ? "flex-col" : ""}`}
+          className={`navbar-container flex  ${
+            targetReached ? "flex-col" : "justify-between px-2"
+          }`}
         >
           <Link
-            className="flex gap-2 justify-center items-center md:mr-24 lg:pl-4 pl-0"
+            className={`flex gap-2 items-center justify-center ${
+              targetReached ? " mt-3" : "mr-24"
+            }`}
             href="/"
           >
             <Image src="/logo.png" alt="Logo" width={50} height={50} />
@@ -40,9 +44,9 @@ export default function Navbar() {
               PDF Novel
             </div>
           </Link>
-          <div className="flex items-center text-main-text-color font-inter Lg:gap-5 lg:text-base justify-center text-2xl">
+          <div className="flex items-center justify-center text-main-text-color font-inter Lg:gap-5 lg:text-base text-2xl">
             <div
-              className={`flex text-center font-semibold lg:mr-48 text-2xl h-14 md:h-20 
+              className={`flex font-semibold lg:mr-48 text-2xl h-14 md:h-20 
             ${
               targetReached
                 ? "fixed bottom-0 bg-main-bg-color w-full justify-center"
@@ -83,13 +87,15 @@ export default function Navbar() {
                 </Link>
               )}
             </div>
-            <Link
-              className={`"flex bg-[#f4f4f8] text-blue-400 font-bold py-2 px-6 hover:bg-gray-50 active:drop-shadow-xl active:shadow-slate-200 text-lg 
-              ${targetReached ? "hidden" : ""}`}
-              href="Home"
-            >
-              Log in
-            </Link>
+            {!targetReached && (
+              <Link
+                className="bg-[#f4f4f8] text-blue-400 font-bold py-2 px-6 hover:bg-gray-50 
+                active:drop-shadow-xl active:shadow-slate-200 text-lg"
+                href="Home"
+              >
+                Log in
+              </Link>
+            )}
           </div>
         </div>
       </nav>
