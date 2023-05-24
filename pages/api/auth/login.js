@@ -1,6 +1,7 @@
 import db from "@/utils/db";
 import { user } from "@/models/data";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 
 const pepper = process.env.PEPPER;
 
@@ -23,6 +24,12 @@ export default async function login(req, res) {
       if (!isPasswordValid) {
         return res.status(400).json({ message: "Invalid password" });
       }
+
+      const token = jwt.sign({ data: userData._id }, process.env.JWT_SECRET, {
+        expiresIn: "1h",
+      });
+
+      res.setHeader("Set-Cookie", `token=${token}; path=/; HttpOnly`);
 
       res.status(200).json({
         message: "User logged in successfully",
