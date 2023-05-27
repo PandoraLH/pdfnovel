@@ -12,13 +12,28 @@ const dataSchema = new mongoose.Schema(
             synopsis: { type: String },
          },
       ],
+      author: { type: String },
+      illustrator: { type: String },
+      genre: [
+         {
+            name: { type: String },
+         },
+      ],
+      otherName: [
+         {
+            name: { type: String },
+         },
+      ],
+      status: { type: String },
       pdfVolume: [
          {
+            name: { type: String },
             link: { type: String },
          },
       ],
       epubVolume: [
          {
+            name: { type: String },
             link: { type: String },
          },
       ],

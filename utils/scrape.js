@@ -91,6 +91,13 @@ async function fetchPDFJnovels(browser) {
                }
                description.push({ synopsis: synopsis.trim() });
             }
+            if (description.length === 1) {
+               description.push({ description: "" });
+               description.push({ synopsis: "" });
+            }
+            if (description.length === 2) {
+               description.push({ synopsis: "" });
+            }
          }
 
          //get the ol which saved the volume and href
@@ -108,9 +115,10 @@ async function fetchPDFJnovels(browser) {
                   })
                   .filter(Boolean)
             );
-            pdfVolume.push(...children);
+            const name = `${items[i].name} Volume ${j + 1}`;
+            const pdfData = children.map((child) => ({ name, ...child }));
+            pdfVolume.push(...pdfData);
          }
-
          //save all to items
          items[i].imgSrc = imgSrc;
          items[i].description = description;
@@ -159,7 +167,9 @@ async function fetchEpubJnovels(browser) {
                   })
                   .filter(Boolean)
             );
-            epubVolume.push(...children);
+            const name = `${items[i].name} Volume ${j + 1}`;
+            const epubData = children.map((child) => ({ name, ...child }));
+            epubVolume.push(...epubData);
          }
          items[i].epubVolume = epubVolume;
       } catch (err) {

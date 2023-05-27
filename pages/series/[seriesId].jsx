@@ -47,7 +47,9 @@ export default function SeriesPage({ novel }) {
                   <Content novel={novel} />
                </Box>
                <Box className="hidden md:block w-1/4 ">
-                  <Information />
+                  <Box className="mr-3 bg-zinc-100 rounded-xl border border-gray-400 shadow-xl">
+                     <Information novel={novel} />
+                  </Box>
                </Box>
             </Box>
          </Box>
