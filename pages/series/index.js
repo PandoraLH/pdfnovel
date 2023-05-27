@@ -26,7 +26,7 @@ export default function SeriesPage({ novels }) {
   }
 
   return (
-    <div>
+    <div className="series bg-white">
       <div className="series-container flex">
         <div className="h-full w-[20%]">
           <div>Sort</div>
