@@ -3,8 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 
 const LightNovel = ({ id, image, title, description, volumn }) => {
-  const [expanded, setExpanded] = React.useState(false);
-
+  const [expandedDescription, setExpandedDescription] = React.useState(false);
+  //Ten khac- status
+  //the loai
+  //DEscription 1 dong
+  //border duoi ro hon
+  //sua series
+  //data
+  //mau searchbar do choi
   return (
     <div
       key={id}
@@ -23,17 +29,18 @@ const LightNovel = ({ id, image, title, description, volumn }) => {
           {title}
         </div>
         <div className="text-lg lg:text-xl">
-          {expanded ? description : `${description.substring(0, 200)}`}
-          {description.length > 200 && (
+          {expandedDescription
+            ? description
+            : `${description.substring(0, 100)}`}
+          {description.length > 100 && (
             <button
               className="text-blue-600 hover:opacity-60 transition-opacity duration-200 ease-in-out"
-              onClick={() => setExpanded(!expanded)}
+              onClick={() => setExpandedDescription(!expandedDescription)}
             >
-              {expanded ? "...see less" : "...see more"}
+              {expandedDescription ? "...see less" : "...see more"}
             </button>
           )}
         </div>
-        <div className="text-gray-400">{volumn}</div>
       </div>
     </div>
   );

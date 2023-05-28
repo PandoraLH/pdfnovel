@@ -12,8 +12,8 @@ export default function SeriesPage({ novels }) {
   const totalNovels = novels.length;
 
   const isMediumScreen = useMediaQuery("(max-width: 768px)");
-  const siblingCount = isMediumScreen ? 0 : 5;
-  const boundaryCount = isMediumScreen ? 0 : 1;
+  const siblingCount = isMediumScreen ? 0 : 4;
+  const boundaryCount = isMediumScreen ? 0 : 2;
 
   const handleChange = (event, value) => {
     setPage(value);
@@ -28,15 +28,16 @@ export default function SeriesPage({ novels }) {
   return (
     <div className="series bg-white">
       <div className="series-container flex">
-        <div className="h-full w-[20%]">
+        <div className="lg:mr-[247px] lg:block hidden">
           <div>Sort</div>
         </div>
-        <div className="h-full w-[80%] mt-3">
+        <div className="h-full w-full mt-3">
           <div className="mb-3">
             <TextField
               label="Search novel"
               variant="outlined"
               size="small"
+              color="primary"
               className="w-full"
               InputProps={{
                 endAdornment: (
