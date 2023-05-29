@@ -1,25 +1,48 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useMediaQuery } from "@mui/material";
-import LightNovel from "../../components/Other/LightNovel";
+import LightNovel from "components/Other/LightNovel";
 import Pagination from "@mui/material/Pagination";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
+import { useRouter } from "next/router";
 
-export default function SeriesPage({ novels }) {
-  const [page, setPage] = useState(1);
-  const totalNovels = novels.length;
+export default function SeriesPage({ totalNovels }) {
+  const router = useRouter();
+  const currentPage = +router.query.page || 1;
+  const totalPage = Math.ceil(totalNovels / 10);
 
   const isMediumScreen = useMediaQuery("(max-width: 768px)");
   const siblingCount = isMediumScreen ? 0 : 4;
   const boundaryCount = isMediumScreen ? 0 : 2;
 
-  const handleChange = (event, value) => {
-    setPage(value);
+  const [novels, setNovels] = useState(null);
+
+  const fetchNovels = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3000/api/novel/getNovels?page=${currentPage}`
+      );
+      const novels = response.data;
+      setNovels(novels);
+    } catch (error) {
+      console.error("Error fetching novels:", error);
+    }
   };
 
-  const currentNovels = novels.slice((page - 1) * 10, page * 10) || [];
+  useEffect(() => {
+    fetchNovels();
+  }, [currentPage]);
+
+  const changePage = async (event, value) => {
+    await router.push(`/series?page=${value}`);
+  };
+
+  useEffect(() => {
+    async function fetchNovel() {}
+    fetchNovel();
+  }, []);
 
   if (!novels) {
     return <p>Loading...</p>;
@@ -50,17 +73,18 @@ export default function SeriesPage({ novels }) {
           </div>
           <div className="flex flex-col items-center mb-3">
             <Pagination
-              count={Math.ceil(totalNovels / 10)}
+              count={totalPage}
               color="primary"
+              page={currentPage}
               size="large"
-              onChange={handleChange}
+              onChange={changePage}
               showFirstButton
               showLastButton
               boundaryCount={boundaryCount}
               siblingCount={siblingCount}
             />
             <div className="lightnovel mt-4 mb-1">
-              {currentNovels.map((novel) => (
+              {novels.map((novel) => (
                 <LightNovel
                   key={novel._id}
                   image={novel.imgSrc}
@@ -70,16 +94,6 @@ export default function SeriesPage({ novels }) {
                 />
               ))}
             </div>
-            <Pagination
-              count={Math.ceil(totalNovels / 10)}
-              color="primary"
-              size="large"
-              onChange={handleChange}
-              showFirstButton
-              showLastButton
-              boundaryCount={boundaryCount}
-              siblingCount={siblingCount}
-            />
           </div>
         </div>
       </div>
@@ -87,19 +101,19 @@ export default function SeriesPage({ novels }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   try {
-    const response = await axios.get("http://localhost:3000/api/novel/getAll");
-    const novels = response.data;
-
+    const response = await axios.get(
+      "http://localhost:3000/api/novel/getTotalNovelCount"
+    );
+    const totalNovels = response.data;
     return {
       props: {
-        novels,
+        totalNovels,
       },
     };
   } catch (error) {
     console.error("Error fetching novels:", error);
-
     return {
       props: {
         novels: null,

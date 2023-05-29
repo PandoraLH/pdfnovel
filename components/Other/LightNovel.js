@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -6,17 +6,11 @@ const LightNovel = ({ id, image, title, description, volumn }) => {
   const [expandedDescription, setExpandedDescription] = React.useState(false);
   //Ten khac- status
   //the loai
-  //DEscription 1 dong
   //border duoi ro hon
-  //sua series
-  //data
   //mau searchbar do choi
   return (
-    <div
-      key={id}
-      className="lightnovel-container flex items-start border-b-2 mb-3 pb-3"
-    >
-      <Link href="/" className="flex-shrink-0">
+    <div className="lightnovel-container flex items-start border-b-2 mb-3 pb-3">
+      <Link href="/" className="flex-shrink-0" key={id}>
         <Image
           src={image || "https://via.placeholder.com/150x200"}
           alt="Image"
