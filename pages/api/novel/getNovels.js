@@ -5,13 +5,11 @@ export default async function getNovels(req, res) {
   if (req.method === "GET") {
     try {
       const currentPage = req.query.page;
-      const [, novels] = await Promise.all([
-        db.connect(),
-        data
-          .find({})
-          .skip((currentPage - 1) * 10)
-          .limit(10),
-      ]);
+      await db.connect();
+      const novels = await data
+        .find({})
+        .skip((currentPage - 1) * 10)
+        .limit(10);
       res.status(200).json(novels);
     } catch (error) {
       console.error(error);
