@@ -1,15 +1,14 @@
 import data from "models/data";
 import db from "utils/db";
-import newData2 from "../../newData2.json";
 
 export default async function handler(req, res) {
    try {
       // Connect to the database
       await db.connect();
 
-      // Call the addData function with the new field values
+      // Call the updateData function with the new field values
       for (const item of newData2) {
-         await addData(item);
+         await updateData(item);
       }
 
       // Disconnect from the database
@@ -25,7 +24,7 @@ export default async function handler(req, res) {
    }
 }
 
-async function addData(newItem) {
+async function updateData(newItem) {
    try {
       // Find the existing data document by its ID
       const existingData = await data.findById(newItem.dataId);
@@ -34,7 +33,7 @@ async function addData(newItem) {
          throw new Error("Data not found");
       }
 
-      // Update the existing document with the new fields
+      // enter the data that u need to update
       existingData.status = newItem.status;
       existingData.otherName = newItem.otherName;
       existingData.author = newItem.author;
