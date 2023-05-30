@@ -34,7 +34,7 @@ const Content = ({ novel }) => {
             <Box className="px-2 pb-4 flex flex-row md:p-8 items-center ">
                <div>
                   <Image
-                     src={novel.imgSrc}
+                     src={novel.imgSrc ? novel.imgSrc : "/imgnotfound.jpg"}
                      alt={novel.name}
                      width={180}
                      height={180}
