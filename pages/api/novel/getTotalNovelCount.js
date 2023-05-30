@@ -1,16 +1,15 @@
 import db from "@/utils/db";
 import { data } from "@/models/data";
 
-export default async function getAll(req, res) {
+export default async function getTotalNovelCount(req, res) {
   if (req.method === "GET") {
     try {
       await db.connect();
-
-      const novels = await data.find({});
-      res.status(200).json(novels);
+      const count = await data.countDocuments({});
+      res.status(200).json(count);
     } catch (error) {
       console.error(error);
-      res.status(500).json({ message: "Error retrieving Novels" });
+      res.status(500).json({ message: "Error retrieving Novels count" });
     } finally {
       await db.disconnect();
     }
