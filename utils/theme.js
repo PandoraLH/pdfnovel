@@ -11,5 +11,8 @@ export const theme = createTheme({
     secondary: {
       main: "rgb(103 232 249 / var(--tw-bg-opacity))",
     },
+    searchbar: {
+      main: "#f3b03d",
+    },
   },
 });

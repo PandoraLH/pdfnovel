@@ -39,11 +39,6 @@ export default function SeriesPage({ totalNovels }) {
     await router.push(`/series?page=${value}`);
   };
 
-  useEffect(() => {
-    async function fetchNovel() {}
-    fetchNovel();
-  }, []);
-
   if (!novels) {
     return <p>Loading...</p>;
   }
@@ -60,7 +55,7 @@ export default function SeriesPage({ totalNovels }) {
               label="Search novel"
               variant="outlined"
               size="small"
-              color="primary"
+              color="searchbar"
               className="w-full"
               InputProps={{
                 endAdornment: (
@@ -89,8 +84,11 @@ export default function SeriesPage({ totalNovels }) {
                   key={novel._id}
                   image={novel.imgSrc}
                   title={novel.name}
-                  description={novel.description[2].synopsis}
-                  volumn={novel.href}
+                  description={novel.description}
+                  otherNames={novel.otherNames}
+                  genres={novel.genres}
+                  author={novel.author}
+                  status={novel.status}
                 />
               ))}
             </div>
