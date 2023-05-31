@@ -1,7 +1,7 @@
 import { Button, Box } from "@mui/material";
 import { borderTop } from "@mui/system";
 import { useState } from "react";
-import Information from "./Information";
+import Information from "../Information/Information";
 import Download from "./Download";
 
 const Tab = ({ label, onClick, active, style }) => {

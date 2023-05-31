@@ -3,7 +3,7 @@ import { Box, Typography, Button } from "@mui/material";
 import { AiOutlineClose } from "react-icons/ai";
 import { AiFillCloseSquare } from "react-icons/ai";
 import Image from "next/image";
-import FDButton from "./FDButton";
+import FDButton from "../FDButton";
 import Information from "./Information";
 
 const InformationModal = ({ isOpen, isClose, novel }) => {

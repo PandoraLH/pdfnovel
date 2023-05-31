@@ -1,5 +1,4 @@
 import { Button, Box, Typography } from "@mui/material";
-import Comment from "./Comment";
 
 const Download = ({ novels, type }) => {
    const handleDownloadClick = (link) => {
@@ -27,7 +26,6 @@ const Download = ({ novels, type }) => {
             </Box>
          </Box>
          <hr className=" border-black" />
-         <Comment />
       </Box>
    );
 };

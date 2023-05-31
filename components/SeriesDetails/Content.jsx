@@ -1,9 +1,9 @@
 import { Box, Typography, Button } from "@mui/material";
 import { FaBars } from "react-icons/fa";
-import TabDownload from "components/SeriesDetails/TabDownload";
+import TabDownload from "components/SeriesDetails/Download/TabDownload";
 import Image from "next/image";
 import { useState } from "react";
-import InformationModal from "./InformationModal";
+import InformationModal from "./Information/InformationModal";
 import FDButton from "./FDButton";
 
 const Content = ({ novel }) => {
@@ -22,7 +22,6 @@ const Content = ({ novel }) => {
    return (
       <Box className=" bg-zinc-100 rounded-t-md">
          <Box className="pb-5 border-t border-l border-r border-gray-400 rounded-t-md">
-            <Box></Box>
             <Box className="md:hidden flex justify-end p-4">
                <FaBars size={28} className="" onClick={handleOpenModal} />
                <InformationModal

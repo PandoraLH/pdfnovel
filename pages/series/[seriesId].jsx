@@ -2,11 +2,12 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { Box, CircularProgress, Typography, Button } from "@mui/material";
-import Information from "components/SeriesDetails/Information";
+import Information from "components/SeriesDetails/Information/Information";
 import Blur from "components/SeriesDetails/Blur";
 import Content from "components/SeriesDetails/Content";
 import { AiFillHome } from "react-icons/ai";
 import { IoIosArrowBack } from "react-icons/io";
+import Image from "next/image";
 export default function SeriesPage({ novel }) {
    const router = useRouter();
 
@@ -32,13 +33,15 @@ export default function SeriesPage({ novel }) {
    return (
       <Box className="w-full">
          <Box className="bg-slate-200">
-            <Blur />
             <Box className="py-5">
                <Button className="bg-zinc-100 flex flex-row items-center gap-2 px-3 rounded-md shadow-md">
-                  <IoIosArrowBack size={26} />
+                  <IoIosArrowBack size={26} className="text-black" />
                   <Box className="flex flex-row items-center gap-1">
-                     <Typography className="text-lg">Home</Typography>
-                     <AiFillHome size={16} />
+                     <Typography className="text-lg text-black">
+                        {" "}
+                        Home
+                     </Typography>
+                     <AiFillHome size={16} className="text-black" />
                   </Box>
                </Button>
             </Box>
