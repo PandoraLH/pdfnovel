@@ -81,7 +81,7 @@ export default function Navbar() {
                 <Link
                   className="flex justify-center items-center w-28 
                 hover:text-blue-300 bg-white bg-opacity-0 hover:bg-opacity-95 transition duration-500 ease-in-out"
-                  href="/Home"
+                  href="/login"
                 >
                   Login
                 </Link>
@@ -91,7 +91,7 @@ export default function Navbar() {
               <Link
                 className="bg-[#f4f4f8] text-blue-400 font-bold py-2 px-6 hover:bg-gray-50 
                 active:drop-shadow-xl active:shadow-slate-200 text-lg"
-                href="Home"
+                href="/login"
               >
                 Log in
               </Link>
