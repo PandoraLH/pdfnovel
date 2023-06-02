@@ -23,7 +23,7 @@ export default function SeriesPage({ totalNovels }) {
   const fetchNovels = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3000/api/novel/getNovels?page=${currentPage}`
+        `/api/novel/getNovels?page=${currentPage}`
       );
       const novels = response.data;
       setNovels(novels);
@@ -108,12 +108,13 @@ export default function SeriesPage({ totalNovels }) {
 export async function getServerSideProps() {
   try {
     const response = await axios.get(
-      "http://localhost:3000/api/novel/getTotalNovelCount"
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/novel/getTotalNovelCount`
     );
     const totalNovels = response.data;
     return {
       props: {
         totalNovels,
+        title: "Series",
       },
     };
   } catch (error) {
@@ -121,6 +122,7 @@ export async function getServerSideProps() {
     return {
       props: {
         novels: null,
+        title: "Series",
       },
     };
   }
