@@ -1,7 +1,11 @@
 import React from "react";
-import { AuthInput, AuthLabel } from "../../components/Other/StyledComponents";
-import { FormControl, Input, InputAdornment, Radio } from "@mui/material";
-import Button from "@mui/base/Button";
+import {
+  AuthInput,
+  AuthLabel,
+  AuthButton,
+} from "../../components/Other/StyledComponents";
+import { FormControl, Radio } from "@mui/material";
+
 import Image from "next/image";
 
 const LoginPage = () => {
@@ -22,7 +26,7 @@ const LoginPage = () => {
           </span>
         </div>
         <div className="login-form">
-          <div className="login-form-container-input mt-12">
+          <div className="login-form-container-input mt-11">
             <AuthLabel>Username</AuthLabel>
             <AuthInput defaultValue="PandoraLH" disableUnderline />
             <AuthLabel>Password</AuthLabel>
@@ -34,22 +38,30 @@ const LoginPage = () => {
           </div>
           <div className="flex justify-between items-center">
             <span className="tracking-wide">
-              <Radio size="large" /> Remember me
+              <Radio size="medium" /> Remember me
             </span>
             <span className="text-blue-600 hover:opacity-60 cursor-pointer">
               Forgot password?
             </span>
           </div>
         </div>
-        <Button>Login</Button>
-        <div className="login-other"></div>
+        <AuthButton className="my-[25px]">Login</AuthButton>
+        <div className="login-other">
+          <div className="flex items-center mx-10">
+            <div class="flex-grow h-[2px]  bg-[#C8D3F9]"></div>
+            <span class="px-2 text-black tracking-wider">or continue with</span>
+            <div class="flex-grow h-[2px] bg-[#C8D3F9]"></div>
+          </div>
+          <div className="social-login"></div>
+        </div>
       </div>
       <div className="illustration-container flex-shrink-0">
         <Image
           className="ml-auto"
-          src="/Explorer.png"
+          src="/explorer_female.png"
           width={600}
           height={500}
+          alt="Explorer Illustration"
         />
       </div>
     </div>
