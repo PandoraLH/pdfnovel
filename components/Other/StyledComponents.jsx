@@ -1,6 +1,7 @@
 import { Input } from "@mui/material";
 import { InputLabel } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import { useFormControlContext } from "@mui/base/FormControl";
 import Button from "@mui/base/Button";
 
 const AuthInput = styled(Input)({
@@ -11,7 +12,7 @@ const AuthInput = styled(Input)({
   letterSpacing: "2px",
   borderColor: "#789ADE",
   color: "#C8D3F9",
-  margin: "15px 0px",
+  marginTop: "15px",
   width: "100%",
   WebkitTextFillColor: "#C8D3F9",
 });
@@ -21,6 +22,7 @@ const AuthLabel = styled(InputLabel)({
   letterSpacing: "1px",
   fontSize: "20px",
   fontWeight: "600",
+  marginTop: "15px",
 });
 
 const AuthButton = styled(Button)({

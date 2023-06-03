@@ -13,7 +13,10 @@ export default async function login(req, res) {
       const userData = await user.findOne({ name: name });
 
       if (!userData) {
-        return res.status(400).json({ message: "User not found" });
+        return res.status(400).json({
+          errorType: "username",
+          message: "User not found",
+        });
       }
 
       const isPasswordValid = await bcrypt.compare(
@@ -22,7 +25,10 @@ export default async function login(req, res) {
       );
 
       if (!isPasswordValid) {
-        return res.status(400).json({ message: "Invalid password" });
+        return res.status(400).json({
+          errorType: "password",
+          message: "Invalid password",
+        });
       }
 
       const token = jwt.sign({ data: userData._id }, process.env.JWT_SECRET, {
