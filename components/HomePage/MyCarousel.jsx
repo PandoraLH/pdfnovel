@@ -43,10 +43,10 @@ const MyCarousel = ({ novels }) => {
 
    return (
       <Box>
-         <Box className="w-full flex flex-col md:flex-row md:gap-4">
+         <Box className="w-full flex flex-col md:flex-row md:gap-4 md:h-full">
             <Box className="md:w-4/5">
                <Box className="flex flex-row px-4 py-3 gap-2">
-                  <Box className="flex justify-end mt-auto gap-2 bg-gray-600 px-2 py-1">
+                  <Box className="flex justify-end mt-auto gap-2 bg-main-bg-color px-2 py-1">
                      <FaCrown size={24} />
                      <Typography className="text-lg text-white font-semibold cursor-pointer">
                         Hot
@@ -71,9 +71,9 @@ const MyCarousel = ({ novels }) => {
                   </Carousel>
                </Box>
             </Box>
-            <Box className=" md:w-1/5">
-               <Box className="py-5 px-2">
-                  <Typography className="text-2xl text-rose-500 font-semibold cursor-pointer flex justify-center md:block">
+            <Box className=" md:w-1/5 md:h-full">
+               <Box className="py-5 px-2 border-">
+                  <Typography className="text-2xl text-white bg-main-bg-color font-semibold cursor-pointer flex justify-center ">
                      Forum Topic
                   </Typography>{" "}
                   <ul className="list-disc pl-5 pt-2">

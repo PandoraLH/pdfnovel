@@ -14,11 +14,11 @@ const ListNovel = ({ novels }) => {
    return (
       <Box className="w-full flex flex-col md:flex-row md:gap-4 mt-6">
          <Box className="md:w-4/5 border-t md:border-r border-gray-300">
-            <Box className=" w-full h-16 flex justify-center mt-2">
+            <Box className=" w-full h-16 flex justify-center mt-2 ">
                <Image src="/logo.png" width={64} height={64} />
             </Box>
-            <Box className="p-2 md:px-6 md:py-4">
-               <Typography className="text-3xl text-rose-500 font-semibold cursor-pointer underline pb-5">
+            <Box className="p-2 md:px-6 md:py-4 flex flex-col gap-4">
+               <Typography className="text-4xl text-rose-500 font-semibold cursor-pointer flex justify-center pb-2 underline">
                   Lastest Release
                </Typography>
                <Box
@@ -53,7 +53,7 @@ const ListNovel = ({ novels }) => {
                </Box>
             </Box>
             <Box className="flex justify-end pr-2 py-4 md:pr-6">
-               <Button className="bg-cyan-300 rounded-md shadow-md hover:bg-cyan-400 pl-4 py-2 gap-2">
+               <Button className=" bg-main-bg-color rounded-md shadow-md hover:bg-rose-400 pl-4 py-2 gap-2">
                   <Typography className=" text-black">See More</Typography>
                   <GrFormNext size={24} />
                </Button>
@@ -61,7 +61,7 @@ const ListNovel = ({ novels }) => {
          </Box>
          <Box className=" md:w-1/5">
             <Box className="py-5 px-2">
-               <Typography className="text-2xl text-rose-500 font-semibold cursor-pointer flex justify-center md:block">
+               <Typography className="text-2xl text-white bg-main-bg-color font-semibold cursor-pointer flex justify-center ">
                   Your Library
                </Typography>{" "}
                <ul className="list-disc pl-5 pt-2">

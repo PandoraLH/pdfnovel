@@ -9,9 +9,8 @@ export default async function handler(req, res) {
          const latestNovels = await data
             .find()
             .sort({ updatedAt: -1 }) // Sort by updatedAt field in descending order
-            .limit(30) // Retrieve the latest 30 novels
+            .limit(24) // Retrieve the latest 24 novels
             .exec();
-
          res.status(200).json(latestNovels);
       } catch (error) {
          res.status(500).json({ error: "Failed to retrieve latest novels" });

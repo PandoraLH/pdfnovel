@@ -3,11 +3,10 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { Box, CircularProgress, Typography, Button } from "@mui/material";
 import Information from "components/SeriesDetails/Information/Information";
-import Blur from "components/SeriesDetails/Blur";
 import Content from "components/SeriesDetails/Content";
 import { AiFillHome } from "react-icons/ai";
 import { IoIosArrowBack } from "react-icons/io";
-import Image from "next/image";
+
 export default function SeriesPage({ novel }) {
    const router = useRouter();
 
