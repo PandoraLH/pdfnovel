@@ -6,9 +6,11 @@ import {
   AuthButton,
 } from "../../components/Other/StyledComponents";
 import { Radio } from "@mui/material";
-import FormControl from "@mui/base/FormControl";
 import Image from "next/image";
 import axios from "axios";
+import Link from "next/link";
+import InputAdornment from "@mui/material/InputAdornment";
+import { FaEyeSlash } from "react-icons/fa";
 
 const LoginPage = () => {
   const router = useRouter();
@@ -16,6 +18,8 @@ const LoginPage = () => {
   const password = useRef(null);
   const [usernameError, setUsernameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const signupStatus = router.query.signup;
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -43,45 +47,57 @@ const LoginPage = () => {
 
   return (
     <div className="login flex items-center justify-between bg-zinc-100">
-      <div className="login-container font-poppins flex-grow mx-10">
+      <div className="login-container font-poppins flex-grow mx-10 my-10">
         <div className="login-welcome flex flex-col">
           <span className="font-bold text-4xl mb-3 tracking-wider">
             WELCOME BACK!
           </span>
           <span className="tracking-widest">
             Don’t have an account?{" "}
-            <span className="text-blue-600 hover:opacity-60 cursor-pointer">
+            <Link
+              className="text-blue-600 hover:opacity-60 cursor-pointer"
+              href="/signup"
+            >
               Sign up
-            </span>
+            </Link>
+            {signupStatus === "success" && (
+              <p className="text-green-500 text-sm tracking-wide">
+                You have signed up successfully! Please log in to continue.
+              </p>
+            )}
           </span>
         </div>
         <form onSubmit={handleLogin}>
           <div className="login-form">
             <div className="login-form-container-input mt-11">
-              <FormControl>
-                <AuthLabel>Username</AuthLabel>
-                <AuthInput
-                  defaultValue="PandoraLH"
-                  disableUnderline
-                  autoComplete="current_username"
-                  inputRef={username}
-                  required
-                />
-                {usernameError && <HelperText error={usernameError} />}
-              </FormControl>
+              <AuthLabel>Username</AuthLabel>
+              <AuthInput
+                defaultValue="PandoraLH"
+                disableUnderline
+                autoComplete="current_username"
+                inputRef={username}
+                required
+              />
+              {usernameError && <HelperText error={usernameError} />}
 
-              <FormControl>
-                <AuthLabel htmlFor="password">Password</AuthLabel>
-                <AuthInput
-                  type="password"
-                  defaultValue="1234567891011"
-                  disableUnderline
-                  autoComplete="current_password"
-                  inputRef={password}
-                  required
-                />
-                {passwordError && <HelperText error={passwordError} />}
-              </FormControl>
+              <AuthLabel htmlFor="password">Password</AuthLabel>
+              <AuthInput
+                type={showPassword ? "text" : "password"}
+                defaultValue="1234567891011"
+                disableUnderline
+                autoComplete="current_password"
+                inputRef={password}
+                required
+                endAdornment={
+                  <InputAdornment position="end">
+                    <FaEyeSlash
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="cursor-pointer"
+                    />
+                  </InputAdornment>
+                }
+              />
+              {passwordError && <HelperText error={passwordError} />}
             </div>
             <div className="flex justify-between items-center">
               <span className="tracking-wide">
@@ -107,9 +123,8 @@ const LoginPage = () => {
           <div className="social-login"></div>
         </div>
       </div>
-      <div className="illustration-container flex-shrink-0">
+      <div className="illustration-container hidden lg:block">
         <Image
-          className="ml-auto"
           src="/explorer_female.png"
           width={600}
           height={500}
