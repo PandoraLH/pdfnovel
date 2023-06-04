@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
 import {
   AuthInput,
@@ -11,32 +11,34 @@ import axios from "axios";
 import Link from "next/link";
 import InputAdornment from "@mui/material/InputAdornment";
 import { FaEyeSlash } from "react-icons/fa";
+import { toast } from "react-hot-toast";
+import { useForm } from "react-hook-form";
 
 const LoginPage = () => {
   const router = useRouter();
-  const username = useRef(null);
-  const password = useRef(null);
-  const [usernameError, setUsernameError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleLogin = async (event) => {
-    event.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors },
+  } = useForm();
+
+  const Login = async (data) => {
     try {
       await axios.post("http://localhost:3000/api/auth/login", {
-        name: username.current.value,
-        password: password.current.value,
+        name: data.username,
+        password: data.password,
       });
-      router.push("/");
+      toast.success("Login successful");
     } catch (error) {
       // Handle server error response
       const { data } = error.response;
-      console.log(data);
-      if (data.errorType === "username") {
-        setUsernameError(data.message);
-      } else if (data.errorType === "password") {
-        setPasswordError(data.message);
-      }
+      setError(data.errorType, {
+        type: "validate",
+        message: data.message,
+      });
     }
   };
 
@@ -61,7 +63,7 @@ const LoginPage = () => {
             </Link>
           </span>
         </div>
-        <form onSubmit={handleLogin}>
+        <form onSubmit={handleSubmit(Login)}>
           <div className="login-form">
             <div className="login-form-container-input mt-11">
               <AuthLabel>Username</AuthLabel>
@@ -69,19 +71,20 @@ const LoginPage = () => {
                 defaultValue="username"
                 disableUnderline
                 autoComplete="current_username"
-                inputRef={username}
                 required
+                {...register("username")}
               />
-              {usernameError && <HelperText error={usernameError} />}
-
+              {errors.username && (
+                <HelperText error={errors.username.message} />
+              )}
               <AuthLabel htmlFor="password">Password</AuthLabel>
               <AuthInput
                 type={showPassword ? "text" : "password"}
                 defaultValue="1234567891011"
                 disableUnderline
                 autoComplete="current_password"
-                inputRef={password}
                 required
+                {...register("password")}
                 endAdornment={
                   <InputAdornment position="end">
                     <FaEyeSlash
@@ -91,7 +94,9 @@ const LoginPage = () => {
                   </InputAdornment>
                 }
               />
-              {passwordError && <HelperText error={passwordError} />}
+              {errors.password && (
+                <HelperText error={errors.password.message} />
+              )}
             </div>
             <div className="flex justify-between items-center">
               <span className="tracking-wide">

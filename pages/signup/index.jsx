@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
 import {
   AuthInput,
@@ -9,46 +9,48 @@ import axios from "axios";
 import Link from "next/link";
 import InputAdornment from "@mui/material/InputAdornment";
 import { FaEyeSlash } from "react-icons/fa";
+import { toast } from "react-hot-toast";
+import { useForm } from "react-hook-form";
 
 const SignupPage = () => {
   const router = useRouter();
-  const username = useRef(null);
-  const password = useRef(null);
-  const email = useRef(null);
-  const confirmPassword = useRef(null);
-  const [usernameError, setUsernameError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const [emailError, setEmailError] = useState("");
-  const [confirmPasswordError, setConfirmPasswordError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const handleSignup = async (event) => {
-    event.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors },
+  } = useForm();
 
-    if (password.current.value !== confirmPassword.current.value) {
-      setConfirmPasswordError("Password does not match");
+  const Signup = async (data) => {
+    if (data.password !== data.confirmPassword) {
+      setError("confirmPassword", {
+        type: "validate",
+        message: "Passwords do not match",
+      });
       return;
     }
-
     try {
       await axios.post("http://localhost:3000/api/auth/signup", {
-        name: username.current.value,
-        email: email.current.value,
-        password: password.current.value,
+        name: data.username,
+        email: data.email,
+        password: data.password,
       });
+      toast.success("Signup successful");
       //TODO NextAuth Session
       //router.push("/login?signup=success");
     } catch (error) {
       // Handle server error response
       const { data } = error.response;
-      console.log(data);
-      if (data.errorType === "username") {
-        setUsernameError(data.message);
-      } else if (data.errorType === "email") {
-        setEmailError(data.message);
-      } else if (data.errorType === "password") {
-        setPasswordError(data.message);
+      if (data.errorType) {
+        setError(data.errorType, {
+          type: "validate",
+          message: data.message,
+        });
+      } else {
+        toast.error("Error signing up from server, please try again later");
       }
     }
   };
@@ -74,7 +76,7 @@ const SignupPage = () => {
             </Link>
           </span>
         </div>
-        <form onSubmit={handleSignup}>
+        <form onSubmit={handleSubmit(Signup)}>
           <div className="login-form">
             <div className="login-form-container-input">
               <AuthLabel>Username</AuthLabel>
@@ -82,26 +84,28 @@ const SignupPage = () => {
                 defaultValue="Ex: PandoraLH"
                 disableUnderline
                 autoComplete="current_username"
-                inputRef={username}
                 required
+                {...register("username")}
               />
-              {usernameError && <HelperText error={usernameError} />}
+              {errors.username && (
+                <HelperText error={errors.username.message} />
+              )}
               <AuthLabel>Email</AuthLabel>
               <AuthInput
                 defaultValue="Ex: PandoraLH@gmail.com"
                 disableUnderline
                 autoComplete="current_email"
-                inputRef={email}
                 required
+                {...register("email")}
               />
-              {emailError && <HelperText error={emailError} />}
+              {errors.email && <HelperText error={errors.email.message} />}
               <AuthLabel htmlFor="password">Password</AuthLabel>
               <AuthInput
                 type={showPassword ? "text" : "password"}
                 disableUnderline
                 autoComplete="current_password"
-                inputRef={password}
                 required
+                {...register("password")}
                 endAdornment={
                   <InputAdornment position="end">
                     <FaEyeSlash
@@ -111,14 +115,16 @@ const SignupPage = () => {
                   </InputAdornment>
                 }
               />
-              {passwordError && <HelperText error={passwordError} />}
+              {errors.password && (
+                <HelperText error={errors.password.message} />
+              )}
               <AuthLabel htmlFor="password">Confirm password</AuthLabel>
               <AuthInput
                 type={showConfirmPassword ? "text" : "password"}
                 disableUnderline
                 autoComplete="current_password"
-                inputRef={confirmPassword}
                 required
+                {...register("confirmPassword")}
                 endAdornment={
                   <InputAdornment position="end">
                     <FaEyeSlash
@@ -130,8 +136,8 @@ const SignupPage = () => {
                   </InputAdornment>
                 }
               />
-              {confirmPasswordError && (
-                <HelperText error={confirmPasswordError} />
+              {errors.confirmPassword && (
+                <HelperText error={errors.confirmPassword.message} />
               )}
             </div>
           </div>
