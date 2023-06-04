@@ -19,7 +19,6 @@ const LoginPage = () => {
   const [usernameError, setUsernameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const signupStatus = router.query.signup;
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -60,11 +59,6 @@ const LoginPage = () => {
             >
               Sign up
             </Link>
-            {signupStatus === "success" && (
-              <p className="text-green-500 text-sm tracking-wide">
-                You have signed up successfully! Please log in to continue.
-              </p>
-            )}
           </span>
         </div>
         <form onSubmit={handleLogin}>
@@ -72,7 +66,7 @@ const LoginPage = () => {
             <div className="login-form-container-input mt-11">
               <AuthLabel>Username</AuthLabel>
               <AuthInput
-                defaultValue="PandoraLH"
+                defaultValue="username"
                 disableUnderline
                 autoComplete="current_username"
                 inputRef={username}

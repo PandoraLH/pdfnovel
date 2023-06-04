@@ -37,7 +37,8 @@ const SignupPage = () => {
         email: email.current.value,
         password: password.current.value,
       });
-      router.push("/login?signup=success");
+      //TODO NextAuth Session
+      //router.push("/login?signup=success");
     } catch (error) {
       // Handle server error response
       const { data } = error.response;
