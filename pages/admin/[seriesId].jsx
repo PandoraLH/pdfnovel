@@ -2,7 +2,6 @@ import { Box, Typography, Button } from "@mui/material";
 import axios from "axios";
 
 export default function AdminSeries({ novel }) {
-   console.log({ novel });
    return <Box>{novel.name}</Box>;
 }
 
