@@ -1,5 +1,7 @@
 import { useState, useEffect, React } from "react";
 import AccountMenu from "components/Other/AccountMenu";
+import { CircularProgress } from "@mui/material";
+import FacebookCircularProgress from "components/Other/FacebookCircularProgress";
 import Link from "next/link";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
@@ -7,7 +9,7 @@ import { useSession } from "next-auth/react";
 export default function Navbar() {
   const [screenWidth, setScreenWidth] = useState(0);
   const [targetReached, setTargetReached] = useState(false);
-  const { data: session, status: loading } = useSession();
+  const { data: session, status } = useSession();
 
   useEffect(() => {
     const handleResize = () => {
@@ -27,6 +29,31 @@ export default function Navbar() {
       setTargetReached(false);
     }
   }, [screenWidth]);
+
+  function UserSection({ loading, targetReached, session }) {
+    const loginButtonClassName = targetReached
+      ? "flex justify-center items-center w-28 hover:text-blue-300 bg-white bg-opacity-0 hover:bg-opacity-95 transition duration-500 ease-in-out"
+      : "bg-[#f4f4f8] text-blue-400 font-bold py-2 px-6 hover:bg-gray-50 active:drop-shadow-xl active:shadow-slate-200 text-lg";
+
+    if (loading) {
+      return <FacebookCircularProgress />;
+    } else if (session) {
+      return (
+        <div className="flex justify-center items-center w-28 ">
+          <AccountMenu
+            username={session.user.name}
+            profilePic={session.user.image}
+          />
+        </div>
+      );
+    } else {
+      return (
+        <Link className={loginButtonClassName} href="/login">
+          Login
+        </Link>
+      );
+    }
+  }
 
   return (
     <header>
@@ -79,43 +106,22 @@ export default function Navbar() {
               >
                 Forums
               </Link>
-
-              {targetReached &&
-                (session && loading ? (
-                  <div className="flex justify-center items-center w-28 ">
-                    <AccountMenu
-                      username={session.user.name}
-                      profilePic={session.user.image}
-                    />
-                  </div>
-                ) : (
-                  <Link
-                    className="flex justify-center items-center w-28 
-                hover:text-blue-300 bg-white bg-opacity-0 hover:bg-opacity-95 transition duration-500 ease-in-out"
-                    href="/login"
-                  >
-                    Login
-                  </Link>
-                ))}
+              {targetReached && (
+                <UserSection
+                  loading={status === "loading"}
+                  targetReached={targetReached}
+                  session={session}
+                />
+              )}
             </div>
 
-            {!targetReached &&
-              (session && loading ? (
-                <div className="flex justify-center items-center w-28 ">
-                  <AccountMenu
-                    username={session.user.name}
-                    profilePic={session.user.image}
-                  />
-                </div>
-              ) : (
-                <Link
-                  className="bg-[#f4f4f8] text-blue-400 font-bold py-2 px-6 hover:bg-gray-50 
-                active:drop-shadow-xl active:shadow-slate-200 text-lg"
-                  href="/login"
-                >
-                  Log in
-                </Link>
-              ))}
+            {!targetReached && (
+              <UserSection
+                loading={status === "loading"}
+                targetReached={targetReached}
+                session={session}
+              />
+            )}
           </div>
         </div>
       </nav>
