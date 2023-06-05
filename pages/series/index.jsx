@@ -1,12 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useMediaQuery } from "@mui/material";
-import LightNovel from "components/Other/LightNovel";
 import Pagination from "@mui/material/Pagination";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
 import { CircularProgress } from "@mui/material";
+import LightNovel from "components/Other/LightNovel";
 import { useRouter } from "next/router";
 
 export default function SeriesPage({ totalNovels }) {

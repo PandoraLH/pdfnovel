@@ -6,18 +6,20 @@ import {
   AuthButton,
 } from "../../components/Other/StyledComponents";
 import { Radio } from "@mui/material";
-import Image from "next/image";
-import axios from "axios";
-import Link from "next/link";
 import InputAdornment from "@mui/material/InputAdornment";
-import { FaEyeSlash } from "react-icons/fa";
+import { FaEyeSlash, FaFacebook } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
+import Image from "next/image";
+import Link from "next/link";
 import { toast } from "react-hot-toast";
 import { useForm } from "react-hook-form";
+import { signIn } from "next-auth/react";
+import { getServerSession } from "next-auth";
+import { authOptions } from "pages/api/auth/[...nextauth]";
 
 const LoginPage = () => {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
-
   const {
     register,
     handleSubmit,
@@ -26,19 +28,22 @@ const LoginPage = () => {
   } = useForm();
 
   const Login = async (data) => {
-    try {
-      await axios.post("http://localhost:3000/api/auth/login", {
-        name: data.username,
-        password: data.password,
-      });
-      toast.success("Login successful");
-    } catch (error) {
+    const result = await signIn("credentials", {
+      username: data.username,
+      password: data.password,
+      redirect: false,
+    });
+    if (result.error) {
       // Handle server error response
-      const { data } = error.response;
-      setError(data.errorType, {
+      const capitalizedError =
+        result.error.charAt(0).toUpperCase() + result.error.slice(1);
+      setError(result.error, {
         type: "validate",
-        message: data.message,
+        message: `${capitalizedError} is invalid`,
       });
+    } else {
+      toast.success("Login successful");
+      router.back();
     }
   };
 
@@ -112,20 +117,39 @@ const LoginPage = () => {
           </AuthButton>
         </form>
         <div className="login-other">
-          <div className="flex items-center mx-10">
-            <div className="flex-grow h-[2px]  bg-[#C8D3F9]"></div>
-            <span className="px-2 text-black tracking-wider">
-              or continue with
-            </span>
-            <div className="flex-grow h-[2px] bg-[#C8D3F9]"></div>
+          <div className="flex flex-col justify-center mx-10">
+            <div className="continue-with flex items-center">
+              <div className="flex-grow h-[2px] bg-[#C8D3F9]"></div>
+              <span className="px-2 text-black tracking-wider">
+                or continue with
+              </span>
+              <div className="flex-grow h-[2px] bg-[#C8D3F9]"></div>
+            </div>
+            <div className="social-icons flex justify-center mt-2">
+              <div
+                className="rounded-xl mx-[15px] border-2 border-[#789ADE] py-4 px-7 inline-block cursor-pointer"
+                onClick={() => {
+                  signIn("google");
+                }}
+              >
+                <FcGoogle className="text-4xl" />
+              </div>
+              <div
+                className="rounded-xl mx-[15px] border-2 border-[#789ADE] py-4 px-7 inline-block cursor-pointer"
+                onClick={() => {
+                  signIn("facebook");
+                }}
+              >
+                <FaFacebook className="text-4xl" color="blue" />
+              </div>
+            </div>
           </div>
-          <div className="social-login"></div>
         </div>
       </div>
       <div className="illustration-container hidden lg:block">
         <Image
           src="/explorer_female.png"
-          width={600}
+          width={700}
           height={500}
           alt="Explorer Illustration"
         />
@@ -136,8 +160,19 @@ const LoginPage = () => {
 
 export default LoginPage;
 
-LoginPage.getInitialProps = async () => {
+export async function getServerSideProps(context) {
+  const session = await getServerSession(context.req, context.res, authOptions);
+  if (session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
   return {
-    title: "Login", // Provide the title as a prop in getInitialProps
+    props: {
+      title: "Login",
+    },
   };
-};
+}

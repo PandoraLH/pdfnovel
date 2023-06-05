@@ -11,6 +11,9 @@ import InputAdornment from "@mui/material/InputAdornment";
 import { FaEyeSlash } from "react-icons/fa";
 import { toast } from "react-hot-toast";
 import { useForm } from "react-hook-form";
+import { getServerSession } from "next-auth";
+import { authOptions } from "pages/api/auth/[...nextauth]";
+import { signIn } from "next-auth/react";
 
 const SignupPage = () => {
   const router = useRouter();
@@ -39,8 +42,13 @@ const SignupPage = () => {
         password: data.password,
       });
       toast.success("Signup successful");
-      //TODO NextAuth Session
-      //router.push("/login?signup=success");
+      await signIn("credentials", {
+        username: data.username,
+        password: data.password,
+        redirect: false,
+      });
+      router.back();
+      router.back();
     } catch (error) {
       // Handle server error response
       const { data } = error.response;
@@ -152,8 +160,19 @@ const SignupPage = () => {
 
 export default SignupPage;
 
-SignupPage.getInitialProps = async () => {
+export async function getServerSideProps(context) {
+  const session = await getServerSession(context.req, context.res, authOptions);
+  if (session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
   return {
-    title: "Signup", // Provide the title as a prop in getInitialProps
+    props: {
+      title: "Signup",
+    },
   };
-};
+}
