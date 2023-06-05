@@ -1,48 +1,45 @@
-import {
-   Box,
-   Typography,
-   Button,
-   Table,
-   TableBody,
-   TableCell,
-   TableContainer,
-   TableHead,
-   TableRow,
-} from "@mui/material";
-import { GrFormAdd } from "react-icons/gr";
-import { AiFillDelete, AiOutlineUnorderedList } from "react-icons/ai";
+import { Box, CircularProgress } from "@mui/material";
 import axios from "axios";
 import TableAdmin from "components/Admin/TableAdmin";
 import { useEffect, useState } from "react";
-import AddNovel from "components/Admin/AddNovel";
 
-const admin = ({ novels }) => {
+const admin = () => {
+   const [novels, setNovels] = useState([]);
+   const [loading, setLoading] = useState(true); // Added loading state
+
+   useEffect(() => {
+      async function fetchNovels() {
+         try {
+            const response = await axios.get(
+               "http://localhost:3000/api/novel/getAll"
+            );
+            const fetchedNovels = response.data;
+            setNovels(fetchedNovels);
+            setLoading(false);
+         } catch (error) {
+            console.error("Error fetching novels:", error);
+            setLoading(false);
+         }
+      }
+      fetchNovels();
+   }, [novels]);
+
    return (
       <Box>
-         <TableAdmin novels={novels} />
+         {loading ? (
+            <Box
+               display="flex"
+               justifyContent="center"
+               alignItems="center"
+               height="200px"
+            >
+               <CircularProgress /> {/* Show CircularProgress while loading */}
+            </Box>
+         ) : (
+            <TableAdmin novels={novels} />
+         )}
       </Box>
    );
 };
 
 export default admin;
-
-export async function getServerSideProps() {
-   try {
-      const response = await axios.get(
-         "http://localhost:3000/api/novel/getAll"
-      );
-      const novels = response.data;
-      return {
-         props: {
-            novels,
-         },
-      };
-   } catch (error) {
-      console.error("Error fetching novels:", error);
-      return {
-         props: {
-            novels: null,
-         },
-      };
-   }
-}

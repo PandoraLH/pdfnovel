@@ -1,8 +1,13 @@
 import { Box, Typography, Button } from "@mui/material";
 import axios from "axios";
+import UpdateNovel from "components/Admin/UpdateNovel";
 
 export default function AdminSeries({ novel }) {
-   return <Box>{novel.name}</Box>;
+   return (
+      <Box>
+         <UpdateNovel novel={novel} />
+      </Box>
+   );
 }
 
 export async function getStaticPaths() {
