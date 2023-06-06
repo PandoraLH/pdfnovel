@@ -63,9 +63,7 @@ export default function SeriesPage({ novel }) {
 
 export async function getStaticPaths() {
    try {
-      const response = await axios.get(
-         "http://localhost:3000/api/novel/getAll"
-      );
+      const response = await axios.get("/api/novel/getAll");
       const novels = response.data;
 
       const paths = novels.map((novel) => ({
@@ -90,7 +88,7 @@ export async function getStaticProps({ params }) {
 
    try {
       const response = await axios.get(
-         `http://localhost:3000/api/novel/getById/${seriesId}`
+         `${process.env.NEXT_PUBLIC_BASE_URL}/api/novel/getById/${seriesId}`
       );
       const novel = response.data;
 

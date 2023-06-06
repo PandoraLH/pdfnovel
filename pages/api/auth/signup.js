@@ -12,23 +12,41 @@ export default async function signup(req, res) {
       await db.connect();
       const { name, email, password } = req.body;
 
+      const existingUser = await user.findOne({
+        name: name,
+      });
+
+      if (existingUser) {
+        return res.status(400).json({
+          errorType: "username",
+          message: "User already exists",
+        });
+      }
+
+      const existingEmail = await user.findOne({
+        email: email,
+      });
+
+      if (existingEmail) {
+        return res.status(400).json({
+          errorType: "email",
+          message: "Email already exists",
+        });
+      }
+
       if (!emailRegex.test(email)) {
-        return res.status(400).json({ message: "Invalid email" });
+        return res.status(400).json({
+          errorType: "email",
+          message: "Invalid email",
+        });
       }
 
       if (!passwordRegex.test(password)) {
         return res.status(400).json({
+          errorType: "password",
           message:
             "Password must be at least 8 characters long and at least contain a number and an uppercase letter",
         });
-      }
-
-      const existingUser = await user.findOne({
-        $or: [{ email }, { name }],
-      });
-
-      if (existingUser) {
-        return res.status(400).json({ message: "User already exists" });
       }
 
       const hashedPassword = await bcrypt.hash(
