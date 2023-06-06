@@ -4,34 +4,26 @@ import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
 import Settings from "@mui/icons-material/Settings";
-import Logout from "@mui/icons-material/Logout";
-import { ArrowDownward } from "@mui/icons-material";
 import Image from "next/image";
-import { useRouter } from "next/router";
-import { signOut } from "next-auth/react";
 
-export default function AccountMenu({ username, profilePic }) {
+export default function FilterMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-  const router = useRouter();
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
-    router.push("/profile");
   };
   return (
     <React.Fragment>
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
-        <Image src={profilePic} alt="Profile Pic" width={32} height={32} />
-        <Typography sx={{ minWidth: 100 }}>{username}</Typography>
-        <Tooltip title="Account settings">
+        <Tooltip title="Filter">
           <IconButton
             onClick={handleClick}
             size="small"
@@ -40,7 +32,7 @@ export default function AccountMenu({ username, profilePic }) {
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
           >
-            <ArrowDownward />
+            <SettingsOutlinedIcon />
           </IconButton>
         </Tooltip>
       </Box>
@@ -80,20 +72,13 @@ export default function AccountMenu({ username, profilePic }) {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem onClick={handleClose}>
-          <Avatar /> Profile
+          <Avatar /> Filter1
         </MenuItem>
-        <Divider />
         <MenuItem onClick={handleClose}>
           <ListItemIcon>
             <Settings fontSize="small" />
           </ListItemIcon>
-          Settings
-        </MenuItem>
-        <MenuItem onClick={signOut}>
-          <ListItemIcon>
-            <Logout fontSize="small" />
-          </ListItemIcon>
-          Log out
+          Filter2
         </MenuItem>
       </Menu>
     </React.Fragment>
