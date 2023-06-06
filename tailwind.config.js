@@ -17,6 +17,7 @@ module.exports = {
             "main-bg-color": "#ff9a92",
             "main-text-color": "#f4f4f8",
             "logo-color": "#ffda55",
+            "border-color": "rgb(209 213 219 / var(--tw-border-opacity))",
          },
       },
    },

@@ -30,7 +30,13 @@ export default function HomePage({ latestNovels }) {
    }
    return (
       <Box className="bg-zinc-100">
-         <Image src="/cover.jpg" width={1152} height={200} />
+         <Image
+            src="/cover.jpg"
+            width={1152}
+            height={200}
+            alt="cover"
+            priority={true}
+         />
          <MyCarousel novels={latestNovels} />
          <ListNovel novels={latestNovels} />
       </Box>
@@ -40,7 +46,7 @@ export default function HomePage({ latestNovels }) {
 export async function getServerSideProps() {
    try {
       const response = await axios.get(
-         "http://localhost:3000/api/novel/getLastest"
+         "http://localhost:3000/api/novel/getLatest"
       );
       const latestNovels = response.data;
 

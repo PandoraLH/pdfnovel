@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Box, CircularProgress, Typography, Button } from "@mui/material";
 import Information from "components/SeriesDetails/Information/Information";
 import Content from "components/SeriesDetails/Content";
@@ -33,14 +33,16 @@ export default function SeriesPage({ novel }) {
       <Box className="w-full">
          <Box className="bg-slate-200">
             <Box className="py-5">
-               <Button className="bg-zinc-100 flex flex-row items-center gap-2 px-3 rounded-md shadow-md">
+               <Button
+                  className="bg-zinc-100 flex flex-row items-center gap-2 px-3 rounded-md shadow-md"
+                  onClick={() => router.back()}
+               >
                   <IoIosArrowBack size={26} className="text-black" />
                   <Box className="flex flex-row items-center gap-1">
                      <Typography className="text-lg text-black">
                         {" "}
-                        Home
+                        Back
                      </Typography>
-                     <AiFillHome size={16} className="text-black" />
                   </Box>
                </Button>
             </Box>

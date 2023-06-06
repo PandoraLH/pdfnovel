@@ -31,25 +31,24 @@ const Content = ({ novel }) => {
                />
             </Box>
             <Box className="px-2 pb-4 flex flex-row md:p-8 items-center ">
-               <div>
-                  <Image
-                     src={novel.imgSrc ? novel.imgSrc : "/imgnotfound.jpg"}
-                     alt={novel.name}
-                     width={180}
-                     height={180}
-                     className="border-[2px] border-white shadow-xl rounded-sm"
-                  />
-               </div>
+               <Image
+                  src={novel.imgSrc ? novel.imgSrc : "/imgnotfound.jpg"}
+                  alt={novel.name}
+                  width={180}
+                  height={180}
+                  className="border-[2px] border-white shadow-xl rounded-sm"
+                  priority="true"
+               />
                <Box className="flex-1 flex-col pl-4 md:pl-6 ">
                   <Typography className="text-2xl md:text-4xl text-rose-500 font-semibold pb-2">
                      {novel.name}
                   </Typography>
-                  <Box className="flex flex-row justify-between gap-5 ">
+                  <Box className="flex flex-row justify-between gap-5 md:gap-10 ">
                      <Box>
                         <div className="pb-4 flex flex-wrap gap-2">
                            {otherNames.map((otherName) => (
                               <Button
-                                 className="text-xs md:text-base md:p-2 bg-cyan-300 text-black rounded-lg shadow-md hover:bg-cyan-400 normal-case"
+                                 className="text-xs md:p-2 bg-sky-300 text-black rounded-lg shadow-md hover:bg-sky-500 normal-case"
                                  key={otherName._id}
                               >
                                  {otherName.name}
@@ -77,7 +76,11 @@ const Content = ({ novel }) => {
                </Typography>
             </Box>
          </Box>
-         <TabDownload pdf={novel.pdfVolume} epub={novel.epubVolume} />
+         <TabDownload
+            name={novel.name}
+            pdf={novel.pdfVolume}
+            epub={novel.epubVolume}
+         />
       </Box>
    );
 };

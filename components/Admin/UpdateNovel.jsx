@@ -255,7 +255,7 @@ const UpdateNovel = ({ novel }) => {
                      onClick={() => appendPdfVolume({ name: "", link: "" })}
                      variant="outlined"
                      color="primary"
-                     className="mt-4"
+                     className=" bg-main-bg-color text-black p-2 mt-4"
                   >
                      Add PDF Volume
                   </Button>
@@ -289,14 +289,12 @@ const UpdateNovel = ({ novel }) => {
                   <Button
                      type="button"
                      onClick={() => appendEpubVolume({ name: "", link: "" })}
-                     variant="outlined"
-                     color="primary"
-                     className="mt-4"
+                     className=" bg-main-bg-color text-black p-2 mt-4"
                   >
                      Add EPUB Volume
                   </Button>
                </div>
-               <Button type="submit" variant="contained" color="primary">
+               <Button type="submit" className="bg-main-bg-color text-black">
                   Update Novel
                </Button>
             </form>

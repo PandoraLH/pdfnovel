@@ -26,7 +26,7 @@ const Tab = ({ label, onClick, active, style }) => {
    );
 };
 
-const TabDownload = ({ pdf, epub }) => {
+const TabDownload = ({ name, pdf, epub }) => {
    const [activeTab, setActiveTab] = useState(1);
 
    const handleTabClick = (tabNumber) => {
@@ -63,8 +63,12 @@ const TabDownload = ({ pdf, epub }) => {
             <div className="flex-1 border-b border-black "></div>
          </Box>
          <Box className="border-l border-r border-black">
-            {activeTab === 1 && <Download novels={pdf} type="pdf" />}
-            {activeTab === 2 && <Download novels={epub} type="epub" />}
+            {activeTab === 1 && (
+               <Download name={name} volumes={pdf} type="pdf" />
+            )}
+            {activeTab === 2 && (
+               <Download name={name} volumes={epub} type="epub" />
+            )}
          </Box>
       </Box>
    );

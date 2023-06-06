@@ -1,17 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import Carousel from "react-material-ui-carousel";
-import { Paper, Box, useMediaQuery, Typography } from "@mui/material";
+import { Box, useMediaQuery, Typography } from "@mui/material";
 import Image from "next/image";
 import { FaCrown } from "react-icons/fa";
+import { useRouter } from "next/router";
 
 function Item(props) {
    const { items } = props;
+   const router = useRouter();
+
    return (
       <Box className="flex justify-between gap-4 px-4">
          {items.map((item) => (
-            <Box key={item._id} className="" width={250} height={300}>
+            <Box
+               key={item._id}
+               className="cursor-pointer"
+               width={250}
+               height={300}
+               onClick={() => {
+                  router.push(`/series/${item._id}`);
+               }}
+            >
                <Image
                   src={item.imgSrc ? item.imgSrc : "/imgnotfound.jpg"}
+                  alt={item.name}
                   width={0}
                   height={0}
                   sizes="(max-width: 768px) 100vw,
@@ -20,7 +32,7 @@ function Item(props) {
                   style={{ height: "100%", width: "100%" }}
                />
                <Box className="relative bottom-20  ">
-                  <Typography className="text-center line-clamp-2 text-xl bg-neutral-300 text-rose-500 font-bold ">
+                  <Typography className="text-center line-clamp-2 text-xl backdrop-blur-2xl text-white font-bold ">
                      {item.name}
                   </Typography>
                </Box>

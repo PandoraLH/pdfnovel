@@ -1,6 +1,6 @@
 import { Button, Box, Typography } from "@mui/material";
 
-const Download = ({ novels, type }) => {
+const Download = ({ name, volumes, type }) => {
    const handleDownloadClick = (link) => {
       window.open(link, "_blank");
    };
@@ -12,12 +12,17 @@ const Download = ({ novels, type }) => {
                DOWNLOAD HERE
             </Typography>
             <Box className="flex flex-col gap-4 ">
-               {novels.map((novel) => (
-                  <Box className="flex flex-row items-center justify-between gap-4">
-                     <Typography>{novel.name}</Typography>
+               {volumes.map((volume) => (
+                  <Box
+                     key={volume._id}
+                     className="flex flex-row items-center justify-between gap-4"
+                  >
+                     <Typography>
+                        {name} {volume.name} {type.toUpperCase()}
+                     </Typography>
                      <Button
-                        className="px-5 py-2 bg-cyan-300 text-black rounded-md shadow-md hover:bg-cyan-400 normal-case gap-2"
-                        onClick={() => handleDownloadClick(novel.link)}
+                        className="px-5 py-2 bg-sky-300 text-black rounded-md shadow-md hover:bg-sky-500 normal-case gap-2"
+                        onClick={() => handleDownloadClick(volume.link)}
                      >
                         DOWNLOAD
                      </Button>
@@ -25,7 +30,6 @@ const Download = ({ novels, type }) => {
                ))}
             </Box>
          </Box>
-         <hr className=" border-black" />
       </Box>
    );
 };
