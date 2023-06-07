@@ -43,7 +43,7 @@ const TableAdmin = ({ novels }) => {
       try {
          for (const novelId of selectedNovels) {
             const response = await fetch(
-               `http://localhost:3000/api/admin/delete/${novelId}`,
+               `${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/delete/${novelId}`,
                {
                   method: "DELETE",
                }

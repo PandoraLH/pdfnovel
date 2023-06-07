@@ -40,7 +40,10 @@ const AddNovelForm = () => {
 
    const onSubmit = async (data) => {
       try {
-         await axios.post("http://localhost:3000/api/admin/addData", data);
+         await axios.post(
+            `${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/addData`,
+            data
+         );
          toast.success("Novel added successfully");
          reset();
       } catch (error) {

@@ -11,7 +11,7 @@ const admin = () => {
       async function fetchNovels() {
          try {
             const response = await axios.get(
-               "http://localhost:3000/api/novel/getAll"
+               `${process.env.NEXT_PUBLIC_BASE_URL}/api/novel/getAll`
             );
             const fetchedNovels = response.data;
             setNovels(fetchedNovels);

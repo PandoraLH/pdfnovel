@@ -62,7 +62,7 @@ const UpdateNovel = ({ novel }) => {
    const onSubmit = async (data) => {
       try {
          const response = await axios.post(
-            `http://localhost:3000/api/admin/update/${novel._id}`,
+            `${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/update/${novel._id}`,
             data
          );
          if (response.status === 200) {

@@ -13,7 +13,7 @@ export default function AdminSeries({ novel }) {
 export async function getStaticPaths() {
    try {
       const response = await axios.get(
-         "http://localhost:3000/api/novel/getAll"
+         `${process.env.NEXT_PUBLIC_BASE_URL}/api/novel/getAll`
       );
       const novels = response.data;
 
@@ -39,7 +39,7 @@ export async function getStaticProps({ params }) {
 
    try {
       const response = await axios.get(
-         `http://localhost:3000/api/novel/getById/${seriesId}`
+         `${process.env.NEXT_PUBLIC_BASE_URL}/api/novel/getById/${seriesId}`
       );
       const novel = response.data;
 

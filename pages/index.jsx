@@ -36,6 +36,7 @@ export default function HomePage({ latestNovels }) {
             height={200}
             alt="cover"
             priority={true}
+            className="w-full"
          />
          <MyCarousel novels={latestNovels} />
          <ListNovel novels={latestNovels} />
@@ -46,7 +47,7 @@ export default function HomePage({ latestNovels }) {
 export async function getServerSideProps() {
    try {
       const response = await axios.get(
-         "http://localhost:3000/api/novel/getLatest"
+         `${process.env.NEXT_PUBLIC_BASE_URL}/api/novel/getLatest`
       );
       const latestNovels = response.data;
 

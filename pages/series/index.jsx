@@ -35,7 +35,7 @@ export default function SeriesPage({ totalNovels, genres }) {
    const fetchNovels = async () => {
       try {
          const response = await axios.get(
-            `http://localhost:3000/api/novel/getNovels?page=${currentPage}&search=${searchQuery}&sort=${sortOption}&genre=${selectedGenre}`
+            `${process.env.NEXT_PUBLIC_BASE_URL}/api/novel/getNovels?page=${currentPage}&search=${searchQuery}&sort=${sortOption}&genre=${selectedGenre}`
          );
          const novels = response.data;
          setNovels(novels);
@@ -242,8 +242,10 @@ export default function SeriesPage({ totalNovels, genres }) {
 export async function getServerSideProps() {
    try {
       const [novelCountResponse, genresResponse] = await axios.all([
-         axios.get("http://localhost:3000/api/novel/getTotalNovelCount"),
-         axios.get("http://localhost:3000/api/novel/getGenres"),
+         axios.get(
+            `${process.env.NEXT_PUBLIC_BASE_URL}/api/novel/getTotalNovelCount`
+         ),
+         axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/novel/getGenres`),
       ]);
 
       const totalNovels = novelCountResponse.data;

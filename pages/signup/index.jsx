@@ -36,11 +36,14 @@ const SignupPage = () => {
          return;
       }
       try {
-         await axios.post("http://localhost:3000/api/auth/signup", {
-            name: data.username,
-            email: data.email,
-            password: data.password,
-         });
+         await axios.post(
+            `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/signup`,
+            {
+               name: data.username,
+               email: data.email,
+               password: data.password,
+            }
+         );
          toast.success("Signup successful");
          await signIn("credentials", {
             username: data.username,
