@@ -11,7 +11,7 @@ export default async function getNovels(req, res) {
 
          await db.connect();
 
-         const nameRegex = new RegExp(searchQuery, "i");
+         const nameRegex = new RegExp(searchQuery, "i"); // Add "i" flag for case-insensitive search
 
          const sortQuery = {};
 
