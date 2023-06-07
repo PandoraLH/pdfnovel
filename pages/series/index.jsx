@@ -93,6 +93,7 @@ export default function SeriesPage({ totalNovels, genres }) {
                               borderRight: "2px solid #d1d5db",
                               borderRadius: 0,
                               width: "50%",
+                              color: "black",
                            }}
                            className={`${
                               selectedSortOption === "A-Z"
@@ -107,6 +108,7 @@ export default function SeriesPage({ totalNovels, genres }) {
                            sx={{
                               borderRadius: 0,
                               width: "50%",
+                              color: "black",
                            }}
                            className={`${
                               selectedSortOption === "Z-A"
@@ -124,6 +126,7 @@ export default function SeriesPage({ totalNovels, genres }) {
                               borderRight: "2px solid #d1d5db",
                               borderRadius: 0,
                               width: "50%",
+                              color: "black",
                            }}
                            className={`${
                               selectedSortOption === "Newest"
@@ -138,6 +141,7 @@ export default function SeriesPage({ totalNovels, genres }) {
                            sx={{
                               borderRadius: 0,
                               width: "50%",
+                              color: "black",
                            }}
                            className={`${
                               selectedSortOption === "Oldest"
@@ -216,7 +220,7 @@ export default function SeriesPage({ totalNovels, genres }) {
                         />
                      ))}
                   </div>
-                  <div className="flex justify-center">
+                  <div className="flex justify-center pt-2">
                      <Pagination
                         count={totalPage}
                         color="primary"
