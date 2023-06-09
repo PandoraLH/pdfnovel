@@ -39,10 +39,11 @@ export default function Navbar() {
          return <FacebookCircularProgress />;
       } else if (session) {
          return (
-            <div className="flex justify-center items-center w-28 ">
+            <div className="flex">
                <AccountMenu
                   username={session.user.name}
                   profilePic={session.user.image}
+                  targetReached={targetReached}
                />
             </div>
          );
@@ -74,7 +75,7 @@ export default function Navbar() {
                      PDF Novel
                   </div>
                </Link>
-               <div className="flex items-center justify-center text-main-text-color font-inter Lg:gap-5 lg:text-base text-2xl z-10">
+               <div className="flex items-center justify-center text-main-text-color font-inter lg:gap-5 lg:text-base text-2xl z-10">
                   <div
                      className={`flex font-semibold lg:mr-48 text-2xl h-14 md:h-20 
             ${

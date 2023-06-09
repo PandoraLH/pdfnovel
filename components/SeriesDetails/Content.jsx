@@ -62,7 +62,7 @@ const Content = ({ novel }) => {
                         </div>
                      </Box>
                      <Box className="hidden md:block self-end">
-                        <FDButton />
+                        <FDButton novelId={novel._id} />
                      </Box>
                   </Box>
                </Box>

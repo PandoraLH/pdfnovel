@@ -51,7 +51,7 @@ const InformationModal = ({ isOpen, isClose, novel }) => {
                   </Box>
                   <Information novel={novel} />
                   <Box className="flex justify-center py-3">
-                     <FDButton />
+                     <FDButton novelId={novel._id} />
                   </Box>
                </Box>
             </Box>
