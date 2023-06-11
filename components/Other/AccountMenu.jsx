@@ -1,15 +1,17 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
-import Avatar from "@mui/material/Avatar";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Tooltip from "@mui/material/Tooltip";
-import Settings from "@mui/icons-material/Settings";
-import Logout from "@mui/icons-material/Logout";
+import { Settings, Logout } from "@mui/icons-material";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+import {
+  Box,
+  Avatar,
+  Menu,
+  MenuItem,
+  Divider,
+  IconButton,
+  Typography,
+  Tooltip,
+  ListItemIcon,
+} from "@mui/material";
 import { FaBars } from "react-icons/fa";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -24,8 +26,20 @@ export default function AccountMenu({ username, profilePic, targetReached }) {
   };
   const handleClose = () => {
     setAnchorEl(null);
-    router.push("/profile");
   };
+
+  const handleLogout = () => {
+    setAnchorEl(null);
+    signOut({
+      callbackUrl: "/",
+    });
+  };
+
+  const handleNavigate = (page) => {
+    setAnchorEl(null);
+    router.push(`/${page}`);
+  };
+
   return (
     <React.Fragment>
       <Box className="flex flex-row items-center">
@@ -79,7 +93,11 @@ export default function AccountMenu({ username, profilePic, targetReached }) {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem onClick={handleClose}>
+        <MenuItem
+          onClick={() => {
+            handleNavigate("profile");
+          }}
+        >
           <Avatar /> Profile
         </MenuItem>
         <Divider />
@@ -90,12 +108,16 @@ export default function AccountMenu({ username, profilePic, targetReached }) {
           Settings
         </MenuItem>
         <MenuItem
-          onClick={() =>
-            signOut({
-              callbackUrl: "/",
-            })
-          }
+          onClick={() => {
+            handleNavigate("admin");
+          }}
         >
+          <ListItemIcon>
+            <AdminPanelSettingsIcon fontSize="small" />
+          </ListItemIcon>
+          Admin page
+        </MenuItem>
+        <MenuItem onClick={handleLogout}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>

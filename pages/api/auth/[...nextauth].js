@@ -10,10 +10,14 @@ const pepper = process.env.PEPPER;
 
 export const authOptions = {
   //Configure JWT
+  pages: {
+    error: "/error", // Error code passed in query string as ?error=
+  },
   secret: process.env.NEXT_AUTH_SECRET,
   session: {
     jwt: true,
   },
+
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
@@ -32,6 +36,12 @@ export const authOptions = {
     },
     async signIn({ account, profile }) {
       if (account.provider === "google") {
+        const existingUserCredentials = await user.findOne({
+          email: profile.email,
+        });
+        if (existingUserCredentials) {
+          return false;
+        }
         //check if user in db
         const existingUser = await userGoogle.findOne({
           email: profile.email,
@@ -46,6 +56,13 @@ export const authOptions = {
           });
         }
       } else if (account.provider === "facebook") {
+        const existingUserCredentials = await user.findOne({
+          email: profile.email,
+        });
+        if (existingUserCredentials) {
+          return false;
+        }
+
         const existingUser = await userFacebook.findOne({
           email: profile.email,
         });

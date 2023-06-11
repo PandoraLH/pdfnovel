@@ -1,5 +1,5 @@
 import db from "@/utils/db";
-import { user } from "@/models/data";
+import { user, userGoogle, userFacebook } from "@/models/data";
 import bcrypt from "bcryptjs";
 
 const pepper = process.env.PEPPER;
@@ -28,10 +28,19 @@ export default async function signup(req, res) {
         email: email,
       });
 
-      if (existingEmail) {
+      const existingEmailGoogle = await userGoogle.findOne({
+        email: email,
+      });
+
+      const existingEmailFacebook = await userFacebook.findOne({
+        email: email,
+      });
+
+      if (existingEmail || existingEmailGoogle || existingEmailFacebook) {
         return res.status(400).json({
           errorType: "email",
-          message: "Email already exists",
+          message:
+            "Email already exists, please check if you have already registered with another provider like Google or Facebook",
         });
       }
 
@@ -59,6 +68,7 @@ export default async function signup(req, res) {
         name: name,
         email: email,
         password: hashedPassword,
+        role: "user",
         followedNovel: [], // add empty followedNovel field
       });
 

@@ -11,18 +11,13 @@ import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlin
 import VpnKeyOutlinedIcon from "@mui/icons-material/VpnKeyOutlined";
 import { signOut } from "next-auth/react";
 import { Box } from "@mui/material";
-import { useSession, useProvider } from "next-auth/react";
 import Image from "next/image";
-import { useRouter } from "next/router";
 
-export default function ProfileMenu() {
-  const { data: session } = useSession();
-  const router = useRouter();
-
+export default function ProfileMenu({ image }) {
   return (
     <Box>
       <Image
-        src={session.user.image}
+        src={image}
         // src="/avatar.jpg"
         alt="Profile Pic"
         width={320}
