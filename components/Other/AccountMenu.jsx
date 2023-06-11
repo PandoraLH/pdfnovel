@@ -90,9 +90,11 @@ export default function AccountMenu({ username, profilePic, targetReached }) {
           Settings
         </MenuItem>
         <MenuItem
-          onClick={signOut({
-            callbackUrl: "/",
-          })}
+          onClick={() =>
+            signOut({
+              callbackUrl: "/",
+            })
+          }
         >
           <ListItemIcon>
             <Logout fontSize="small" />

@@ -50,9 +50,11 @@ export default function ProfileMenu() {
           </MenuItem>
           <Divider />
           <MenuItem
-            onClick={signOut({
-              callbackUrl: "/",
-            })}
+            onClick={() =>
+              signOut({
+                callbackUrl: "/",
+              })
+            }
           >
             <ListItemIcon>
               <Logout fontSize="small" />
