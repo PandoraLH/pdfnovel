@@ -97,7 +97,6 @@ export async function getStaticProps({ params }) {
 
       return {
          props: {
-            title: `${novel.name}`,
             novel,
          },
       };
