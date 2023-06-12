@@ -45,7 +45,9 @@ const UpdateNovel = ({ novel }) => {
 
    const handleDeleteNovel = async () => {
       try {
-         const response = await axios.delete(`/api/admin/delete/${novel._id}`);
+         const response = await axios.delete(
+            `${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/delete/${novel._id}`
+         );
 
          if (response.status === 200) {
             toast.success("Novel deleted successfully");
