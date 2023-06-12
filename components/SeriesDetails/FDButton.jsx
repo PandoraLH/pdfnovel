@@ -1,31 +1,30 @@
 import { Box, Typography, Button } from "@mui/material";
 import { AiFillEye } from "react-icons/ai";
-import { useSession, useProvider } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { toast } from "react-hot-toast";
 
 const FDButton = ({ novelId }) => {
    const { data: session } = useSession();
    const [isFollowing, setIsFollowing] = useState(false);
+
    useEffect(() => {
-      const checkFollowing = () => {
-         if (
-            session &&
-            session.user &&
-            session.user.followedNovel &&
-            session.user.followedNovel.some(
-               (followedNovel) => followedNovel.toString() === novelId
-            )
-         ) {
-            setIsFollowing(true);
-         } else {
-            setIsFollowing(false);
+      const checkFollowing = async () => {
+         try {
+            const response = await axios.get(
+               `${process.env.NEXT_PUBLIC_BASE_URL}/api/user/getFollowedNovel?email=${session.user.email}`
+            );
+            const followedNovels = response.data;
+            setIsFollowing(
+               followedNovels.some((novel) => novel._id === novelId)
+            );
+         } catch (error) {
+            console.log(error);
          }
       };
 
       checkFollowing();
-   }, [session, novelId]);
+   }, [novelId, session]);
 
    const handleFollowNovel = async () => {
       try {

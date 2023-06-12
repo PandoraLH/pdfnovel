@@ -5,7 +5,7 @@ import axios from "axios";
 import { Box, CircularProgress, Typography, Button } from "@mui/material";
 import ListNovel from "components/HomePage/ListNovel";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export default function HomePage({ latestNovels }) {
    const router = useRouter();

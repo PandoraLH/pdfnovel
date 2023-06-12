@@ -44,7 +44,7 @@ export default function Footer() {
                         <SubLink
                            text="Forums"
                            onClick={() => {
-                              router.push("/404");
+                              router.push("/forums");
                            }}
                         />
                      </ul>

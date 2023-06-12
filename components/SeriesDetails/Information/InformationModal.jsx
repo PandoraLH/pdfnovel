@@ -1,14 +1,10 @@
 import { useState, useEffect, useCallback } from "react";
-import { Box, Typography, Button } from "@mui/material";
-import { AiOutlineClose } from "react-icons/ai";
 import { AiFillCloseSquare } from "react-icons/ai";
-import Image from "next/image";
 import FDButton from "../FDButton";
 import Information from "./Information";
 
 const InformationModal = ({ isOpen, isClose, novel }) => {
    const [showModal, setShowModal] = useState(isOpen);
-   const genres = novel.genre;
    useEffect(() => {
       setShowModal(isOpen);
    }, [isOpen]);

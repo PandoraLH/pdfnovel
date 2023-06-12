@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { Box, Typography, Button } from "@mui/material";
-import { AiOutlineClose } from "react-icons/ai";
+import { Box } from "@mui/material";
 import { AiFillCloseSquare } from "react-icons/ai";
 import ProfileMenu from "./ProfileMenu";
 

@@ -255,6 +255,7 @@ export async function getServerSideProps() {
          props: {
             totalNovels,
             genres,
+            title: "Series",
          },
       };
    } catch (error) {

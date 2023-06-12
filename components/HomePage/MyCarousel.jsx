@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Carousel from "react-material-ui-carousel";
 import { Box, useMediaQuery, Typography } from "@mui/material";
 import Image from "next/image";
@@ -44,7 +44,7 @@ function Item(props) {
 
 const MyCarousel = ({ novels }) => {
    const isResponsive = useMediaQuery("(max-width: 768px)");
-   const itemsPerPage = isResponsive ? 2 : 4;
+   const itemsPerPage = isResponsive ? 2 : 5;
    const pages = Math.ceil(novels.length / itemsPerPage);
 
    const getItemsByPage = (page) => {
@@ -56,7 +56,7 @@ const MyCarousel = ({ novels }) => {
    return (
       <Box>
          <Box className="w-full flex flex-col md:flex-row md:gap-4 md:h-full">
-            <Box className="md:w-4/5">
+            <Box className="w-full">
                <Box className="flex flex-row px-4 py-3 gap-2">
                   <Box className="flex justify-end mt-auto gap-2 bg-main-bg-color px-2 py-1">
                      <FaCrown size={24} />
@@ -83,7 +83,7 @@ const MyCarousel = ({ novels }) => {
                   </Carousel>
                </Box>
             </Box>
-            <Box className=" md:w-1/5 md:h-full">
+            {/* <Box className=" md:w-1/5 md:h-full">
                <Box className="py-5 px-2 border-">
                   <Typography className="text-2xl text-white bg-main-bg-color font-semibold cursor-pointer flex justify-center ">
                      Forum Topic
@@ -96,7 +96,7 @@ const MyCarousel = ({ novels }) => {
                      <li>Forum Topic 5</li>
                   </ul>
                </Box>
-            </Box>
+            </Box> */}
          </Box>
       </Box>
    );

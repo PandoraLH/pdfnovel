@@ -2,14 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Typography, Box } from "@mui/material";
 import { FaBars } from "react-icons/fa";
 import ProfileMenuModal from "./ProfileMenuModal";
-import { useSession } from "next-auth/react";
 import axios from "axios";
 import LightNovel from "components/Series/LightNovel";
-import FDButton from "components/SeriesDetails/FDButton";
+import FollowButton from "./FollowButton";
 
-const Library = () => {
+const Library = ({ session }) => {
    const [openModal, setOpenModal] = useState(false);
-   const { data: session } = useSession();
    const [followedNovels, setFollowedNovels] = useState([]);
 
    const handleOpenModal = () => {
@@ -20,27 +18,29 @@ const Library = () => {
       setOpenModal(false);
    };
 
-   useEffect(() => {
-      const fetchFollowedNovels = async () => {
-         if (session.user?.followedNovel) {
-            try {
-               const novels = [];
-               for (const novelId of session.user.followedNovel) {
-                  const response = await axios.get(
-                     `${process.env.NEXT_PUBLIC_BASE_URL}/api/novel/getLibrary/${novelId}`
-                  );
-                  novels.push(response.data);
-               }
-               setFollowedNovels(novels);
-            } catch (error) {
-               console.log(error);
-            }
-         } else {
+   const fetchFollowedNovels = async () => {
+      if (session.user.email) {
+         try {
+            const response = await axios.get(
+               `${process.env.NEXT_PUBLIC_BASE_URL}/api/user/getFollowedNovel?email=${session.user.email}`
+            );
+            const followedNovels = response.data;
+            setFollowedNovels(followedNovels);
+         } catch (error) {
+            console.log(error);
          }
-      };
+      } else {
+         setFollowedNovels([]);
+      }
+   };
 
+   useEffect(() => {
       fetchFollowedNovels();
-   }, [session]);
+   }, []);
+
+   const reloadLibrary = () => {
+      fetchFollowedNovels();
+   };
 
    return (
       <div className="library">
@@ -48,17 +48,21 @@ const Library = () => {
             <FaBars size={28} className="" onClick={handleOpenModal} />
             <ProfileMenuModal isOpen={openModal} isClose={handleCloseModal} />
          </Box>
-         <Typography
-            className="pb-3 md:pt-3 flex justify-center text-rose-500 font-semibold text-2xl"
-            variant="h5"
-         >
-            Library
-         </Typography>
-         <div className="flex flex-col">
+         <div className="flex flex-col border-gray-300 border-l-2">
+            <Typography className="pb-3 md:pt-3 flex justify-center text-rose-500 font-semibold text-4xl border-gray-300 border-b-2">
+               Library
+            </Typography>
             {followedNovels.length > 0 ? (
                <div className="">
                   {followedNovels.map((novel) => (
-                     <div className="">
+                     <div className="flex flex-col items-end pt-2 pr-2">
+                        <div className=" ">
+                           <FollowButton
+                              novelId={novel._id}
+                              session={session}
+                              reloadLibrary={reloadLibrary}
+                           />
+                        </div>
                         <LightNovel
                            key={novel._id}
                            id={novel._id}
@@ -70,9 +74,6 @@ const Library = () => {
                            author={novel.author}
                            status={novel.status}
                         />
-                        <div className="pb-5 px-2">
-                           <FDButton novelId={novel._id} />
-                        </div>
                      </div>
                   ))}
                </div>

@@ -3,6 +3,7 @@ import { Box, useMediaQuery, Typography, Button } from "@mui/material";
 import Image from "next/image";
 import { GrFormNext } from "react-icons/gr";
 import { useRouter } from "next/router";
+import YourLibrary from "./YourLibrary";
 
 const ListNovel = ({ novels }) => {
    const router = useRouter();
@@ -85,18 +86,7 @@ const ListNovel = ({ novels }) => {
             </Box>
          </Box>
          <Box className=" md:w-1/5">
-            <Box className=" px-2 pb-2">
-               <Typography className="text-2xl text-white bg-main-bg-color font-semibold cursor-pointer flex justify-center ">
-                  Your Library
-               </Typography>{" "}
-               <ul className="list-disc pl-5 pt-2">
-                  <li>Novel 1</li>
-                  <li>Novel 2</li>
-                  <li>Novel 3</li>
-                  <li>Novel 4</li>
-                  <li>Novel 5</li>
-               </ul>
-            </Box>
+            <YourLibrary />
          </Box>{" "}
       </Box>
    );

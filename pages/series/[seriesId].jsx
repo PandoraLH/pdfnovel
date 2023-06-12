@@ -6,6 +6,7 @@ import Information from "components/SeriesDetails/Information/Information";
 import Content from "components/SeriesDetails/Content";
 import { AiFillHome } from "react-icons/ai";
 import { IoIosArrowBack } from "react-icons/io";
+import { getSession } from "next-auth";
 
 export default function SeriesPage({ novel }) {
    const router = useRouter();
@@ -63,11 +64,13 @@ export default function SeriesPage({ novel }) {
 
 export async function getStaticPaths() {
    try {
-      const response = await axios.get("/api/novel/getAll");
-      const novels = response.data;
+      const response = await axios.get(
+         `${process.env.NEXT_PUBLIC_BASE_URL}/api/novel/getIdAll`
+      );
+      const novelIds = response.data;
 
-      const paths = novels.map((novel) => ({
-         params: { seriesId: novel._id },
+      const paths = novelIds.map((novelId) => ({
+         params: { seriesId: novelId },
       }));
 
       return {
@@ -75,7 +78,7 @@ export async function getStaticPaths() {
          fallback: true,
       };
    } catch (error) {
-      console.error("Error fetching novels:", error);
+      console.error("Error fetching novel IDs:", error);
       return {
          paths: [],
          fallback: true,
@@ -94,6 +97,7 @@ export async function getStaticProps({ params }) {
 
       return {
          props: {
+            title: `${novel.name}`,
             novel,
          },
       };
