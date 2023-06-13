@@ -75,13 +75,13 @@ export async function getStaticPaths() {
 
       return {
          paths,
-         fallback: true,
+         fallback: false,
       };
    } catch (error) {
       console.error("Error fetching novel IDs:", error);
       return {
          paths: [],
-         fallback: true,
+         fallback: false,
       };
    }
 }

@@ -23,13 +23,13 @@ export async function getStaticPaths() {
 
       return {
          paths,
-         fallback: true,
+         fallback: false,
       };
    } catch (error) {
       console.error("Error fetching novels:", error);
       return {
          paths: [],
-         fallback: true,
+         fallback: false,
       };
    }
 }
