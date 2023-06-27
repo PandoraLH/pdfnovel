@@ -42,8 +42,7 @@ To run the Next.js project, follow these steps:
 2. Clone this repository to your local machine.
 3. In the project directory, create a `.env` file.
 4. Open the `.env` file and provide the necessary environment variables. Your .env should be like this
-
-  .env
+```
   MONGODB_URI = mongodb+srv://pdfnovel:ranismbirain125@cluster0.xdtjl8y.mongodb.net/pdfnovel?retryWrites=true&w=majority
   PEPPER = d18e3440dae2eacbc8e1c11b023c56d9
   JWT_SECRET = Zk2yetIBawcxtMXejL1E6LPhAg8Y10sULoAEpLgrJh1SM1s3rSM3Mhbqj5dffdPW7tgE/ru9c367r6jG6Qa1kfjJqkFDNf3ZVbhyod4ELXLqUZEIEJNtXPs2Czyyqs9DTfKnX2hNz+PTh/4gz9LFPuLwrUKa41+s3PujpHr671QMsoNP8NV+yQsbXh6tgGtkCKtPREyNwdlpRNsyVYh9mF4vcHSeCQHldBZRHAW3oUaCouxaKP1Cxkbk6zpv2wC6QpezLZI5nTnd9Q8ybATuTLtvBkvYvm4P2IAGvAtW5Bhz3WD8FWL8RDg8331URyn11mA+To98R6aGxqtBwAn5DQ==
@@ -55,15 +54,15 @@ To run the Next.js project, follow these steps:
   GOOGLE_CLIENT_SECRET= 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
   FACEBOOK_CLIENT_ID= 1320568425204767
   FACEBOOK_CLIENT_SECRET= 8bd9cc2bede7482eee2793bcd39a14ac
-
+```
 5. Install the project dependencies by running the following command:
-
+```
   npm install
-
+```
 6. Once the installation is complete, start the development server with the following command:
-
+```
   npm run dev
-
+```
 7. The application should now be running locally. Access it by visiting `http://localhost:3000` in your web browser.
 
 Please note that the `.env` file should never be committed to version control systems like Git as it may contain sensitive information. Make sure to keep it private and secure.
