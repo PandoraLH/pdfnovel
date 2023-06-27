@@ -53,5 +53,7 @@ export async function getStaticProps({ params }) {
             novel: null,
          },
       };
+   } finally {
+      await db.disconnect();
    }
 }
