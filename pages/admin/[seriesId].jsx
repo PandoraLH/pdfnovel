@@ -44,7 +44,7 @@ export async function getStaticProps({ params }) {
          props: {
             novel,
          },
-         revalidate: 60, // Set the revalidation time in seconds
+         revalidate: 10, // Set the revalidation time in seconds
       };
    } catch (error) {
       console.error("Error fetching novel:", error);
@@ -53,7 +53,7 @@ export async function getStaticProps({ params }) {
          props: {
             novel: null,
          },
-         revalidate: 60,
+         revalidate: 10,
       };
    } finally {
       await db.disconnect();
