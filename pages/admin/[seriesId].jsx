@@ -11,30 +11,7 @@ export default function AdminSeries({ novel }) {
    );
 }
 
-export async function getStaticPaths() {
-   try {
-      await db.connect();
-      const novels = await data.find({}).select("_id");
-      const novelIds = novels.map((novel) => novel._id.toString());
-      const paths = novelIds.map((novelId) => ({
-         params: { seriesId: novelId },
-      }));
-      return {
-         paths,
-         fallback: "blocking",
-      };
-   } catch (error) {
-      console.error("Error fetching novels:", error);
-      return {
-         paths: [],
-         fallback: "blocking",
-      };
-   } finally {
-      await db.disconnect();
-   }
-}
-
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
    const { seriesId } = params;
    try {
       await db.connect();
@@ -44,7 +21,6 @@ export async function getStaticProps({ params }) {
          props: {
             novel,
          },
-         revalidate: 10, // Set the revalidation time in seconds
       };
    } catch (error) {
       console.error("Error fetching novel:", error);
@@ -53,7 +29,6 @@ export async function getStaticProps({ params }) {
          props: {
             novel: null,
          },
-         revalidate: 10,
       };
    } finally {
       await db.disconnect();
