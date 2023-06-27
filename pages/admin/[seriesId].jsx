@@ -27,7 +27,7 @@ export async function getStaticPaths() {
       console.error("Error fetching novels:", error);
       return {
          paths: [],
-         fallback: false,
+         fallback: true,
       };
    } finally {
       await db.disconnect();
