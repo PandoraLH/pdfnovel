@@ -32,7 +32,7 @@ function Item(props) {
                   style={{ height: "100%", width: "100%" }}
                />
                <Box className="relative bottom-20  ">
-                  <Typography className="text-center line-clamp-2 text-xl backdrop-blur-2xl text-white font-bold ">
+                  <Typography className="text-center line-clamp-2 text-xl backdrop-blur-2xl bg-gray-400/60 text-white font-bold ">
                      {item.name}
                   </Typography>
                </Box>

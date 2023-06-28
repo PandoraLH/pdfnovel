@@ -57,7 +57,7 @@ const ListNovel = ({ novels }) => {
                               className="h-full w-full"
                            />
                            <Box className="relative bottom-10 ">
-                              <Typography className=" line-clamp-2 text-left pl-2 text-lg backdrop-blur-2xl  text-white font-bold ">
+                              <Typography className=" line-clamp-2 text-left pl-2 text-lg bg-gray-400/60 text-white font-bold ">
                                  {item.pdfVolume.length > 0 &&
                                     item.pdfVolume[item.pdfVolume.length - 1]
                                        .name}
