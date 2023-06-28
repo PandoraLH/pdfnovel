@@ -74,13 +74,13 @@ export async function getStaticPaths() {
       }));
       return {
          paths,
-         fallback: "blocking", // Set fallback to 'blocking'
+         fallback: false,
       };
    } catch (error) {
       console.error("Error fetching novel IDs:", error);
       return {
          paths: [],
-         fallback: "blocking",
+         fallback: false,
       };
    } finally {
       await db.disconnect();
@@ -98,7 +98,6 @@ export async function getStaticProps({ params }) {
          props: {
             novel,
          },
-         revalidate: 60, // Set the revalidation time in seconds
       };
    } catch (error) {
       console.error("Error fetching novel:", error);
@@ -107,7 +106,6 @@ export async function getStaticProps({ params }) {
          props: {
             novel: null,
          },
-         revalidate: 60,
       };
    } finally {
       await db.disconnect();
